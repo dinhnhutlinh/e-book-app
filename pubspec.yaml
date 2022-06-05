@@ -1,0 +1,52 @@
+name: e_book_app
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  get: ^4.6.3
+  # dio: ^4.0.6
+  # retrofit: ^3.0.1+1
+  build_runner: ^2.1.11
+  google_fonts: ^3.0.1
+  cached_network_image: ^3.2.1
+  json_serializable: ^6.2.0
+  # retrofit_generator: ^4.0.1
+  flutter_gen_runner: ^4.2.0
+  firebase_core: ^1.17.1
+  firebase_auth: ^3.3.19
+  google_sign_in: ^5.3.2
+  flutter_svg: ^1.1.0
+  json_annotation: ^4.5.0
+  cloud_firestore: ^3.1.17
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter_gen:
+  output: lib/
+
+  integrations:
+    flutter_svg: true
+
+flutter:
+  uses-material-design: true
+  assets:
+    - resources/images/
+    - resources/icons/
+    - resources/langs/
