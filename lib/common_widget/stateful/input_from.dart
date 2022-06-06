@@ -15,7 +15,7 @@ class InputForm extends StatefulWidget {
     required this.controller,
     required this.isPassword,
     required this.hintText,
-    required this.validator,
+    this.validator,
   }) : super(key: key);
 
   @override

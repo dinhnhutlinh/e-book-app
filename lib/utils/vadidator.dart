@@ -1,24 +1,27 @@
+import 'package:injectable/injectable.dart';
+
+@lazySingleton
 class Validator {
-  static String? isNotNull(dynamic o) {
+  String? isNotNull(String fieldName, dynamic o) {
     if (o == null) {
-      return 'không thể rỗng';
+      return '$fieldName không thể rỗng';
     } else {
       return null;
     }
   }
 
-  static String? isNotNullAndEmpty(String? text) {
+  String? isNotNullAndEmpty(String fieldName, String? text) {
     if (text == null || text.isEmpty) {
-      return 'không thể rỗng';
+      return '$fieldName không thể rỗng';
     } else {
       return null;
     }
   }
 
-  static String? isEmail(String? text) {
+  String? isEmail(String fieldName, String? text) {
     String? error;
 
-    error = isNotNullAndEmpty(text);
+    error = isNotNullAndEmpty(fieldName, text);
 
     if (error == null) {
       final emailRegex = RegExp(
@@ -31,13 +34,14 @@ class Validator {
         return 'Email không hợp lệ';
       }
     }
+
     return error;
   }
 
-  static String? isIdNumber(String? text) {
+  String? isIdNumber(String fieldName, String? text) {
     String? error;
 
-    error = isNotNullAndEmpty(text);
+    error = isNotNullAndEmpty(fieldName, text);
 
     if (error == null) {
       final digitRegex = RegExp(r'^[0-9]*$');
@@ -46,17 +50,17 @@ class Validator {
       final isMadeOfDigit = digitRegex.hasMatch(text);
 
       if (!isValidLength || !isMadeOfDigit) {
-        return 'không hợp lệ';
+        return '$fieldName không hợp lệ';
       }
     }
 
     return error;
   }
 
-  static String? isNumber(String? text) {
+  String? isNumber(String fieldName, String? text) {
     String? error;
 
-    error = isNotNullAndEmpty(text);
+    error = isNotNullAndEmpty(fieldName, text);
     if (error == null) {
       final digitRegex = RegExp(r'^[0-9]*$');
 
@@ -65,14 +69,14 @@ class Validator {
       final isMadeOfDigit = digitRegex.hasMatch(text);
 
       if (!isValidNumber || !isMadeOfDigit) {
-        return 'không hợp lệ';
+        return '$fieldName không hợp lệ';
       }
     }
 
     return error;
   }
 
-  static String? isNullOrEmail(String? text) {
+  String? isNullOrEmail(String fieldName, String? text) {
     if (text != null && text.isNotEmpty) {
       final emailRegex = RegExp(
         r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
@@ -85,10 +89,10 @@ class Validator {
     return null;
   }
 
-  static String? checkPassword(String? text) {
+  String? checkPassword(String fieldName, String? text) {
     String? error;
 
-    error = isNotNullAndEmpty(text);
+    error = isNotNullAndEmpty(fieldName, text);
 
     if (error == null) {
       if (text!.length < 8) {
@@ -99,22 +103,22 @@ class Validator {
     return error;
   }
 
-  static String? isPhone(String? text) {
+  String? isPhone(String fieldName, String? text) {
     String? error;
 
-    error = isNotNullAndEmpty(text);
+    error = isNotNullAndEmpty(fieldName, text);
 
     if (error == null) {}
 
     return error;
   }
 
-  static String? isNullOrPhone(String? text) {
+  String? isNullOrPhone(String fieldName, String? text) {
     String? error;
 
     if (text != null && text.isNotEmpty) {
       if (text.length > 13) {
-        return 'không hợp lệ';
+        return '$fieldName không hợp lệ';
       }
       if (error == null) {}
     }

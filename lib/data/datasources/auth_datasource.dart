@@ -1,10 +1,15 @@
 import 'package:e_book_app/utils/exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class AuthDataSource {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
+
+  AuthDataSource(this._firebaseAuth, this._googleSignIn);
 
   Future<User?> signIn(
       {required String email, required String password}) async {
@@ -63,4 +68,6 @@ class AuthDataSource {
     );
     return (await _firebaseAuth.signInWithCredential(credential)).user;
   }
+
+  User? getUser() => _firebaseAuth.currentUser;
 }

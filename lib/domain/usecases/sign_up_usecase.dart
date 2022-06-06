@@ -1,13 +1,13 @@
-
 import 'package:e_book_app/data/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class SignInWithGoogleUseCase {
+class SignUpUsecase {
   final AuthRepository _authRepository;
 
-  SignInWithGoogleUseCase(this._authRepository);
+  SignUpUsecase(this._authRepository);
 
-  Future<User?> execute() => _authRepository.signInWithGoogle();
+  Future<User?> execute({required String email, required String password}) =>
+      _authRepository.signUp(email: email, password: password);
 }

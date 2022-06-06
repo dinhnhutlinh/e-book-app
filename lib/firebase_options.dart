@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCY7TyYWtfkfUSy5B9j5FzVGgY8bHLjxw4',
-    appId: '1:923624442012:android:75acf97bf4d77e78198559',
+    appId: '1:923624442012:android:4388d83388c31b05198559',
     messagingSenderId: '923624442012',
     projectId: 'e-book-8ba5f',
     storageBucket: 'e-book-8ba5f.appspot.com',
@@ -59,11 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDAU3uPL3gRdnbS2fUFIPkmZ4w62CyKzwg',
-    appId: '1:923624442012:ios:f297b44ca0321b74198559',
+    appId: '1:923624442012:ios:d7d6420f043eba2b198559',
     messagingSenderId: '923624442012',
     projectId: 'e-book-8ba5f',
     storageBucket: 'e-book-8ba5f.appspot.com',
-    iosClientId: '923624442012-1re5sl5qdlkqkl3eugeks257hibuc1s0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.eBookAdmin',
+    iosClientId: '923624442012-ml04lb6r2sa3rltpoipcmnl52u38bll1.apps.googleusercontent.com',
+    iosBundleId: 'com.example.eBookApp',
   );
 }
