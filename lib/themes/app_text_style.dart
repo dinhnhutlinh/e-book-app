@@ -38,4 +38,9 @@ class AppTextStyle {
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle textBlue = GoogleFonts.openSans(
+    color: AppColors.darkBlue,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
 }

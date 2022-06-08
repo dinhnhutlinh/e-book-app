@@ -17,4 +17,6 @@ class AuthRepository {
   void signOut() => _dataSource.signOut();
 
   Future<User?> signInWithGoogle() => _dataSource.signInWithGoogle();
+
+  User? getUser() => _dataSource.getUser();
 }

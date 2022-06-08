@@ -1,19 +1,24 @@
 import 'package:e_book_app/assets.gen.dart';
 import 'package:e_book_app/common_widget/stateful/input_from.dart';
 import 'package:e_book_app/common_widget/stateless/custom_round_button.dart';
-import 'package:e_book_app/presetations/auth/controllers/sign_up_controller.dart';
+import 'package:e_book_app/presetations/auth/controllers/auth_controller.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
-import 'package:e_book_app/utils/vadidator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpPage extends StatelessWidget {
   static const route = '/SignUp';
 
-  final SignUpController _signUpController = Get.put(SignUpController());
-
   final _formKey = GlobalKey<FormState>();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _rePasswordController = TextEditingController();
+
+  final _authController = Get.find<AuthController>();
+
+  SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +44,11 @@ class SignUpPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Center(
+                    child: Assets.resources.images.logoWhite.image(height: 100),
+                  ),
                   const SizedBox(
-                    height: 200,
-                    child: Center(
-                      child: Text('logo'),
-                    ),
+                    height: 64,
                   ),
                   Form(
                     key: _formKey,
@@ -65,7 +70,7 @@ class SignUpPage extends StatelessWidget {
                             height: 24,
                           ),
                           InputForm(
-                            controller: _signUpController.emailController,
+                            controller: _emailController,
                             isPassword: false,
                             hintText: 'Email',
                           ),
@@ -73,7 +78,7 @@ class SignUpPage extends StatelessWidget {
                             height: 24,
                           ),
                           InputForm(
-                            controller: _signUpController.passwordController,
+                            controller: _passwordController,
                             isPassword: true,
                             hintText: 'Mật khẩu',
                           ),
@@ -81,7 +86,7 @@ class SignUpPage extends StatelessWidget {
                             height: 24,
                           ),
                           InputForm(
-                            controller: _signUpController.rePasswordController,
+                            controller: _rePasswordController,
                             isPassword: true,
                             hintText: 'Nhập mật khẩu',
                           ),
@@ -92,12 +97,12 @@ class SignUpPage extends StatelessWidget {
                             width: double.infinity,
                             height: 52,
                             child: CustomRoundButton(
-                                onPress: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    _signUpController.signIn();
-                                  }
-                                },
-                                title: 'Đăng Nhập'),
+                                onPress: () => _authController.signUp(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                      rePassword: _rePasswordController.text,
+                                    ),
+                                title: 'Đăng ký'),
                           )
                         ],
                       ),

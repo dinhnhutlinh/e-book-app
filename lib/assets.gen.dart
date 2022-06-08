@@ -21,6 +21,16 @@ class $ResourcesGen {
 class $ResourcesIconsGen {
   const $ResourcesIconsGen();
 
+  /// File path: resources/icons/align-left-two.svg
+  SvgGenImage get alignLeftTwo =>
+      const SvgGenImage('resources/icons/align-left-two.svg');
+
+  /// File path: resources/icons/book.svg
+  SvgGenImage get book => const SvgGenImage('resources/icons/book.svg');
+
+  /// File path: resources/icons/like.svg
+  SvgGenImage get like => const SvgGenImage('resources/icons/like.svg');
+
   /// File path: resources/icons/preview-close.svg
   SvgGenImage get previewClose =>
       const SvgGenImage('resources/icons/preview-close.svg');
@@ -28,6 +38,12 @@ class $ResourcesIconsGen {
   /// File path: resources/icons/preview-open.svg
   SvgGenImage get previewOpen =>
       const SvgGenImage('resources/icons/preview-open.svg');
+
+  /// File path: resources/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('resources/icons/search.svg');
+
+  /// File path: resources/icons/user.svg
+  SvgGenImage get user => const SvgGenImage('resources/icons/user.svg');
 }
 
 class $ResourcesImagesGen {
@@ -36,6 +52,22 @@ class $ResourcesImagesGen {
   /// File path: resources/images/Ellipse 5.png
   AssetGenImage get ellipse5 =>
       const AssetGenImage('resources/images/Ellipse 5.png');
+
+  /// File path: resources/images/Search.png
+  AssetGenImage get search =>
+      const AssetGenImage('resources/images/Search.png');
+
+  /// File path: resources/images/logoBlue.png
+  AssetGenImage get logoBlue =>
+      const AssetGenImage('resources/images/logoBlue.png');
+
+  /// File path: resources/images/logoOrange.png
+  AssetGenImage get logoOrange =>
+      const AssetGenImage('resources/images/logoOrange.png');
+
+  /// File path: resources/images/logoWhite.png
+  AssetGenImage get logoWhite =>
+      const AssetGenImage('resources/images/logoWhite.png');
 }
 
 class Assets {

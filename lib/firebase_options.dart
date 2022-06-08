@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '923624442012',
     projectId: 'e-book-8ba5f',
     storageBucket: 'e-book-8ba5f.appspot.com',
+    androidClientId: '923624442012-0k7gt4fndvg7l7sco4im7hk7rqgdrnf0.apps.googleusercontent.com',
     iosClientId: '923624442012-ml04lb6r2sa3rltpoipcmnl52u38bll1.apps.googleusercontent.com',
     iosBundleId: 'com.example.eBookApp',
   );

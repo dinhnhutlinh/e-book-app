@@ -7,4 +7,5 @@ class AppColors {
   static const orange = Color(0xffF1906F);
 
   static const white = Color(0xffffffff);
+  static const blueBackground = Color(0xffEBF2FA);
 }

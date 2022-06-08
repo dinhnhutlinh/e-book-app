@@ -1,21 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_profile_model.dart';
+part of 'user_profile.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
-    UserProfileModel(
-      json['id'] as String,
-      json['name'] as String?,
-      json['avatar'] as String?,
-      json['isAdmin'] as bool?,
-      json['status'] as String?,
+UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
+      id: json['id'] as String,
+      name: json['name'] as String?,
+      avatar: json['avatar'] as String?,
+      isAdmin: json['isAdmin'] as bool?,
+      status: json['status'] as String? ?? UserStatus.active,
     );
 
-Map<String, dynamic> _$UserProfileModelToJson(UserProfileModel instance) =>
+Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

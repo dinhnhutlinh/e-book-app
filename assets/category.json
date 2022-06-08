@@ -1,0 +1,102 @@
+[
+    {
+        "id": 0,
+        "name": "Ẩm thực - Nấu ăn",
+        "link": "https://nhasachmienphi.com/category/am-thuc-nau-an"
+    },
+    {
+        "id": 1,
+        "name": "Cổ Tích - Thần Thoại",
+        "link": "https://nhasachmienphi.com/category/co-tich-than-thoai"
+    },
+    {
+        "id": 2,
+        "name": "Công Nghệ Thông Tin",
+        "link": "https://nhasachmienphi.com/category/cong-nghe-thong-tin"
+    },
+    {
+        "id": 3,
+        "name": "Học Ngoại Ngữ",
+        "link": "https://nhasachmienphi.com/category/hoc-ngoai-ngu"
+    },
+    {
+        "id": 4,
+        "name": "Hồi Ký - Tuỳ Bút",
+        "link": "https://nhasachmienphi.com/category/hoi-ky-tuy-but"
+    },
+    {
+        "id": 5,
+        "name": "Huyền bí - Giả Tưởng",
+        "link": "https://nhasachmienphi.com/category/huyen-bi-gia-tuong"
+    },
+    {
+        "id": 7,
+        "name": "Khoa Học - Kỹ Thuật",
+        "link": "https://nhasachmienphi.com/category/khoa-hoc-ky-thuat"
+    },
+    {
+        "id": 9,
+        "name": "Kiến Trúc - Xây Dựng",
+        "link": "https://nhasachmienphi.com/category/kien-truc-xay-dung"
+    },
+    {
+        "id": 10,
+        "name": "Kinh Tế - Quản Lý",
+        "link": "https://nhasachmienphi.com/category/kinh-te-quan-ly"
+    },
+    {
+        "id": 11,
+        "name": "Lịch Sử - Chính Trị",
+        "link": "https://nhasachmienphi.com/category/lich-su-chinh-tri"
+    },
+    {
+        "id": 12,
+        "name": "Marketing - Bán hàng",
+        "link": "https://nhasachmienphi.com/category/marketing-ban-hang"
+    },
+    {
+        "id": 13,
+        "name": "Nông - Lâm - Ngư",
+        "link": "https://nhasachmienphi.com/category/nong-lam-ngu"
+    },
+    {
+        "id": 14,
+        "name": "Phiêu Lưu - Mạo Hiểm",
+        "link": "https://nhasachmienphi.com/category/phieu-luu-mao-hiem"
+    },
+    {
+        "id": 15,
+        "name": "Tài Liệu Học Tập",
+        "link": "https://nhasachmienphi.com/category/tai-lieu-hoc-tap"
+    },
+    {
+        "id": 16,
+        "name": "Tâm Lý - Kỹ Năng Sống",
+        "link": "https://nhasachmienphi.com/category/tam-ly-ky-nang-song"
+    },
+    {
+        "id": 19,
+        "name": "Tiểu Thuyết Phương Tây",
+        "link": "https://nhasachmienphi.com/category/tieu-thuyet-phuong-tay"
+    },
+    {
+        "id": 21,
+        "name": "Triết Học",
+        "link": "https://nhasachmienphi.com/category/triet-hoc"
+    },
+    {
+        "id": 22,
+        "name": "Trinh Thám - Hình Sự",
+        "link": "https://nhasachmienphi.com/category/trinh-tham-hinh-su"
+    },
+    {
+        "id": 29,
+        "name": "Văn Hóa - Tôn Giáo",
+        "link": "https://nhasachmienphi.com/category/van-hoa-ton-giao"
+    },
+    {
+        "id": 30,
+        "name": "Văn Học Việt Nam",
+        "link": "https://nhasachmienphi.com/category/van-hoc-viet-nam"
+    }
+]

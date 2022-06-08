@@ -7,48 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:923624442012:android:75acf97bf4d77e78198559",
-        "android_client_info": {
-          "package_name": "com.example.e_book_admin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "923624442012-o1ujs3f5dk3ormkn6j5rbvvllgagtmf9.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCY7TyYWtfkfUSy5B9j5FzVGgY8bHLjxw4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "923624442012-o1ujs3f5dk3ormkn6j5rbvvllgagtmf9.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "923624442012-1re5sl5qdlkqkl3eugeks257hibuc1s0.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.eBookAdmin"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:923624442012:android:4388d83388c31b05198559",
         "android_client_info": {
           "package_name": "com.example.e_book_app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "923624442012-0k7gt4fndvg7l7sco4im7hk7rqgdrnf0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.e_book_app",
+            "certificate_hash": "85ec749b6475d78665ab0a5922b1459ff879ca38"
+          }
+        },
         {
           "client_id": "923624442012-o1ujs3f5dk3ormkn6j5rbvvllgagtmf9.apps.googleusercontent.com",
           "client_type": 3
