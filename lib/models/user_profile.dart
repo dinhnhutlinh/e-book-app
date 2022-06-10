@@ -9,6 +9,7 @@ class UserProfile {
   final String id;
   final String? name;
   final String? avatar;
+  final String? email;
   final bool? isAdmin;
   final String? status;
   @TimestampConverter()
@@ -18,6 +19,7 @@ class UserProfile {
     required this.id,
     this.name,
     this.avatar,
+    this.email,
     this.isAdmin = false,
     this.status = UserStatus.active,
   }) : lastSignin = DateTime.now();
@@ -27,8 +29,12 @@ class UserProfile {
 
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 
-  static UserProfile fromUser(User user) =>
-      UserProfile(id: user.uid, name: user.displayName, avatar: user.photoURL);
+  static UserProfile fromUser(User user) => UserProfile(
+        id: user.uid,
+        name: user.displayName,
+        avatar: user.photoURL,
+        email: user.email,
+      );
 
   @override
   String toString() {

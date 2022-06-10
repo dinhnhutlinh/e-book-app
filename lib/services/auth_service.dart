@@ -55,13 +55,17 @@ class AuthService extends GetxService {
   }
 
   Future<void> signInWithGoogle() async {
-    await _authRepository.signInWithGoogle().then((value) {
+    await _authRepository.signInWithGoogle().then((value) async {
       _user = value;
-      _userRepository.createUserProfileWithGoogle(UserProfile.fromUser(_user!));
+
+      await _userRepository
+          .createUserProfileWithGoogle(UserProfile.fromUser(_user!));
     }).onError((error, stackTrace) {
       throw AuthException(error.toString());
     });
   }
+
+  Future<void> signInWithFacebook() => _authRepository.signInWithFacebook();
 
   Future<void> signUp(
       {required String email,

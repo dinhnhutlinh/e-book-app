@@ -21,6 +21,14 @@ class $ResourcesGen {
 class $ResourcesIconsGen {
   const $ResourcesIconsGen();
 
+  /// File path: resources/icons/FacebookLogo.svg
+  SvgGenImage get facebookLogo =>
+      const SvgGenImage('resources/icons/FacebookLogo.svg');
+
+  /// File path: resources/icons/GoogleLogo.svg
+  SvgGenImage get googleLogo =>
+      const SvgGenImage('resources/icons/GoogleLogo.svg');
+
   /// File path: resources/icons/align-left-two.svg
   SvgGenImage get alignLeftTwo =>
       const SvgGenImage('resources/icons/align-left-two.svg');
@@ -88,6 +96,7 @@ class $ResourcesImagesGen {
 class Assets {
   Assets._();
 
+  static const String book2 = 'assets/book2.json';
   static const String category = 'assets/category.json';
   static const $ResourcesGen resources = $ResourcesGen();
 }

@@ -3,7 +3,6 @@ import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_pa
 import 'package:e_book_app/presetations/admin/dashbroad/controller/dashbroad_binding.dart';
 import 'package:e_book_app/presetations/admin/dashbroad/pages/dashbroad_page.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
-import 'package:e_book_app/presetations/auth/pages/sign_up_page.dart';
 import 'package:e_book_app/presetations/home/controllers/home_binding.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:get/get.dart';
@@ -15,10 +14,10 @@ class Routes {
         name: SignInPage.route,
         page: () => SignInPage(),
       ),
-      GetPage(
-        name: SignUpPage.route,
-        page: () => SignUpPage(),
-      ),
+      // GetPage(
+      //   name: SignUpPage.route,
+      //   page: () => SignUpPage(),
+      // ),
       GetPage(
         name: HomePage.route,
         page: () => HomePage(),

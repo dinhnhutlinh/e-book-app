@@ -10,6 +10,7 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
       id: json['id'] as String,
       name: json['name'] as String?,
       avatar: json['avatar'] as String?,
+      email: json['email'] as String?,
       isAdmin: json['isAdmin'] as bool? ?? false,
       status: json['status'] as String? ?? UserStatus.active,
     );
@@ -19,6 +20,7 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'id': instance.id,
       'name': instance.name,
       'avatar': instance.avatar,
+      'email': instance.email,
       'isAdmin': instance.isAdmin,
       'status': instance.status,
     };

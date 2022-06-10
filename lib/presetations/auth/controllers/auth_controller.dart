@@ -37,10 +37,34 @@ class AuthController extends GetxController {
     });
   }
 
-  signUp(
+  Future signUp(
       {required String email,
       required String password,
-      required String rePassword}) {}
+      required String rePassword}) async {
+    EasyLoading.show(status: 'Xin chờ');
+    await _auhtService
+        .signUp(email: email, password: password, rePassword: rePassword)
+        .then((value) async {
+      await EasyLoading.showSuccess('Đã tạo tài khoản');
+    }).onError((error, stackTrace) async {
+      await EasyLoading.showError('Tạo tài khoản không thành công');
+    });
+  }
+
+  Future signInWithFacebook() async {
+    EasyLoading.show(status: 'Xin chờ');
+    await _auhtService.signInWithFacebook().then((value) {
+      EasyLoading.dismiss();
+      Get.offNamed(HomePage.route);
+    }).onError((error, stackTrace) {
+      print(error);
+      EasyLoading.dismiss();
+      AppAlertDialog.show(
+        title: 'Lỗi',
+        content: error.toString(),
+      );
+    });
+  }
 
   void signOut() {
     _auhtService.signOut();

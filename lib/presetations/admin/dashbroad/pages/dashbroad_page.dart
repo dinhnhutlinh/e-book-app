@@ -146,7 +146,9 @@ class DashbroadPage extends StatelessWidget {
                         ),
                         ManagerTile(
                           title: const Text('Quản lý danh mục'),
-                          subTitle: const Text('Số lượng ${10}'),
+                          subTitle: Obx(
+                            () => Text('Số lượng ${_control.countCategories}'),
+                          ),
                           trailing: Assets.resources.icons.alignLeftTwo.svg(
                             height: 36,
                             color: AppColors.deepOrange,

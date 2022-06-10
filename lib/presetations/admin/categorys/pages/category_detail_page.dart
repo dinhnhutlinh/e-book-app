@@ -16,6 +16,8 @@ class CategoryDetailPage extends StatelessWidget {
   final _nameController = TextEditingController();
   final _keyForm = GlobalKey<FormState>();
 
+  CategoryDetailPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     _nameController.text = _category.name ?? '';

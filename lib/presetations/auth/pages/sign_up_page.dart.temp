@@ -39,6 +39,12 @@ class SignUpPage extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            color: AppColors.white,
+          ),
+        ),
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -62,7 +68,7 @@ class SignUpPage extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Đăng Nhập',
+                              'Đăng ký',
                               style: AppTextStyle.headerWhite,
                             ),
                           ),

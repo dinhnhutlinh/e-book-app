@@ -4,6 +4,7 @@ import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_pa
 import 'package:e_book_app/presetations/admin/dashbroad/widgets/manager_tile.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
+import 'package:e_book_app/utils/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,9 +49,10 @@ class CategoriesPage extends StatelessWidget {
             visible: _categoriesController.isVisibleFloatButton,
             child: FloatingActionButton(
               backgroundColor: AppColors.deepOrange,
-              onPressed: () => _categoriesController.updateOrCreateCat(
-                Category(
-                  id: _categoriesController.categories.last.id + 1,
+              onPressed: () => Get.toNamed(
+                CategoryDetailPage.route,
+                arguments: Category(
+                  id: StringUtil.getRandomString(8),
                 ),
               ),
               child: const Icon(

@@ -12,11 +12,11 @@ class UserRepository {
   User? getUser() => _firebaseAuth.currentUser;
 
   Future<UserProfile> getUserProfile(String uid) async {
-    final repo = await _userProfiles.where('id', isEqualTo: uid).get();
-    return UserProfile.fromJson(repo.docs.first.data() as Map<String, dynamic>);
+    final repo = await _userProfiles.doc(uid).get();
+    return UserProfile.fromJson(repo.data() as Map<String, dynamic>);
   }
 
-  void createUserProfileWithGoogle(UserProfile userProfile) async {
+  Future<void> createUserProfileWithGoogle(UserProfile userProfile) async {
     if (!(await wasExitUser(userProfile.id))) {
       await createUserProfile(userProfile);
     } else {

@@ -25,6 +25,7 @@ class CategoriesController extends GetxController {
         _isShowFloatButton.value = true;
       }
     });
+
     fetchData();
     super.onInit();
   }
@@ -32,12 +33,11 @@ class CategoriesController extends GetxController {
   Future<void> fetchData() async {
     await _categoryServices.getAll().then((value) {
       _items.value = value;
-    }).onError((error, stackTrace) {
-      Get.bottomSheet(
-        Container(
-          child: const Text('Lỗi'),
-        ),
+      _items.sort(
+        (a, b) => b.updateAt!.compareTo(a.updateAt ?? DateTime.now()),
       );
+    }).onError((error, stackTrace) {
+      EasyLoading.showError('Lỗi');
     });
     _wasLoad.value = true;
   }
@@ -45,9 +45,13 @@ class CategoriesController extends GetxController {
   Future<void> updateOrCreateCat(Category category) async {
     EasyLoading.show();
     await _categoryServices.updateOrCrateCat(category).then((value) async {
-      _items[_items.indexWhere((element) => element.id == category.id)] =
-          category;
-
+      _items.removeWhere((element) => element.id == category.id);
+      _items.add(category);
+      _items.sort(
+        (a, b) => b.updateAt!.compareTo(
+          a.updateAt ?? DateTime.now(),
+        ),
+      );
       await EasyLoading.showSuccess('Cập nhật thành công');
       Get.back();
     }).onError((error, stackTrace) async {
