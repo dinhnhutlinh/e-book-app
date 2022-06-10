@@ -36,6 +36,7 @@ dependencies:
   injectable_generator: ^1.5.3
   easy_loading: ^0.0.4
   flutter_easyloading: ^3.0.5
+  dynamic_color: ^1.4.0
 
 dev_dependencies:
   flutter_test:
@@ -55,3 +56,4 @@ flutter:
     - resources/images/
     - resources/icons/
     - resources/langs/
+    - assets/category.json

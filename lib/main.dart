@@ -1,23 +1,20 @@
-import 'package:e_book_app/injection.dart';
-import 'package:e_book_app/presetations/app_binding.dart';
-import 'package:e_book_app/presetations/auth/controllers/auth_controller.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/routers/app_router.dart';
-import 'package:e_book_app/themes/app_colors.dart';
+import 'package:e_book_app/services/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
+import 'presetations/app_binding.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await setupInjector();
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle
@@ -33,7 +30,7 @@ Future<void> main(List<String> args) async {
     ..maskColor = Colors.black.withOpacity(0.2)
     ..dismissOnTap = false;
 
-  Get.put(AuthController());
+  Get.put(AuthService());
   runApp(const MyApp());
 }
 
@@ -44,17 +41,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.darkBlue,
-        ),
         useMaterial3: true,
       ),
       builder: EasyLoading.init(),
       getPages: Routes.router(),
-      initialRoute: Get.find<AuthController>().isLogin
-          ? HomePage.route
-          : SignInPage.route,
       initialBinding: AppBinding(),
+      initialRoute:
+          Get.find<AuthService>().isLogin ? HomePage.route : SignInPage.route,
     );
   }
 }

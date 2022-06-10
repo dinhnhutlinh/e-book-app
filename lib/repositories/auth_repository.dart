@@ -1,14 +1,10 @@
 import 'package:e_book_app/utils/exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:injectable/injectable.dart';
 
-@lazySingleton
-class AuthDataSource {
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
-
-  AuthDataSource(this._firebaseAuth, this._googleSignIn);
+class AuthRepository {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<User?> signIn(
       {required String email, required String password}) async {
@@ -32,8 +28,7 @@ class AuthDataSource {
   Future<User?> signUp(
       {required String email, required String password}) async {
     await _firebaseAuth
-        .createUserWithEmailAndPassword(
-            email: "barry.allen@example.com", password: "SuperSecretPassword!")
+        .createUserWithEmailAndPassword(email: email, password: password)
         .onError((error, stackTrace) {
       if (error is FirebaseAuthException) {
         if (error.code == 'weak-password') {

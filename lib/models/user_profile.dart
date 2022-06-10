@@ -1,3 +1,4 @@
+import 'package:e_book_app/utils/date_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,24 +11,29 @@ class UserProfile {
   final String? avatar;
   final bool? isAdmin;
   final String? status;
+  @TimestampConverter()
+  final DateTime lastSignin;
 
-  UserProfile(
-      {required this.id,
-      this.name,
-      this.avatar,
-      this.isAdmin = false,
-      this.status = UserStatus.active});
+  UserProfile({
+    required this.id,
+    this.name,
+    this.avatar,
+    this.isAdmin = false,
+    this.status = UserStatus.active,
+  }) : lastSignin = DateTime.now();
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 
-  static UserProfile fromUser(User user) => UserProfile(
-        id: user.uid,
-        name: user.displayName,
-        avatar: user.photoURL,
-      );
+  static UserProfile fromUser(User user) =>
+      UserProfile(id: user.uid, name: user.displayName, avatar: user.photoURL);
+
+  @override
+  String toString() {
+    return 'UserProfile(id: $id, name: $name, avatar: $avatar, isAdmin: $isAdmin, status: $status)';
+  }
 }
 
 class UserStatus {

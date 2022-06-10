@@ -1,1 +1,0 @@
-chứa các cấu hình trong app như các tên cố định trong phần

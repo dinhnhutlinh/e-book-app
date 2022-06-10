@@ -13,8 +13,8 @@ class HomePage extends StatelessWidget {
   final _homeController = Get.find<HomeController>();
 
   final _pages = [
-    StorePage(),
-    StorePage(),
+    const StorePage(),
+    const StorePage(),
     // StorePage(),
     UserDetailPage()
   ];

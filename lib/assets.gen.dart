@@ -25,11 +25,26 @@ class $ResourcesIconsGen {
   SvgGenImage get alignLeftTwo =>
       const SvgGenImage('resources/icons/align-left-two.svg');
 
+  /// File path: resources/icons/bank-card.svg
+  SvgGenImage get bankCard =>
+      const SvgGenImage('resources/icons/bank-card.svg');
+
   /// File path: resources/icons/book.svg
   SvgGenImage get book => const SvgGenImage('resources/icons/book.svg');
 
+  /// File path: resources/icons/bookshelf.svg
+  SvgGenImage get bookshelf =>
+      const SvgGenImage('resources/icons/bookshelf.svg');
+
+  /// File path: resources/icons/id-card-h.svg
+  SvgGenImage get idCardH => const SvgGenImage('resources/icons/id-card-h.svg');
+
   /// File path: resources/icons/like.svg
   SvgGenImage get like => const SvgGenImage('resources/icons/like.svg');
+
+  /// File path: resources/icons/personal-privacy.svg
+  SvgGenImage get personalPrivacy =>
+      const SvgGenImage('resources/icons/personal-privacy.svg');
 
   /// File path: resources/icons/preview-close.svg
   SvgGenImage get previewClose =>
@@ -73,6 +88,7 @@ class $ResourcesImagesGen {
 class Assets {
   Assets._();
 
+  static const String category = 'assets/category.json';
   static const $ResourcesGen resources = $ResourcesGen();
 }
 

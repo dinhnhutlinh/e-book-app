@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StorePage extends StatelessWidget {
+  const StorePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +53,6 @@ class StorePage extends StatelessWidget {
                   ),
                 ),
                 width: Get.width,
-                height: Get.height,
                 child: ListView(
                   padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
                   children: [

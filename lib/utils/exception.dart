@@ -4,14 +4,21 @@ class AuthException implements Exception {
   AuthException(this.error);
 
   @override
-  String toString() {
-    // TODO: implement toString
-    return error;
-  }
+  String toString() => error;
+
+  String get mess => error;
 }
 
 class UserException implements Exception {
   final String error;
 
   UserException(this.error);
+}
+
+class DataException implements Exception {
+  final String error;
+
+  DataException(this.error);
+
+  String get mess => error;
 }

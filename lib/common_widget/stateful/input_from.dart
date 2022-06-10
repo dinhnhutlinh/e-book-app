@@ -8,6 +8,7 @@ class InputForm extends StatefulWidget {
   final TextEditingController controller;
   final bool isPassword;
   final String hintText;
+  final bool isLight;
   final FormFieldValidator<String>? validator;
 
   const InputForm({
@@ -15,6 +16,7 @@ class InputForm extends StatefulWidget {
     required this.controller,
     required this.isPassword,
     required this.hintText,
+    this.isLight = true,
     this.validator,
   }) : super(key: key);
 
@@ -33,7 +35,9 @@ class _InputFormState extends State<InputForm> {
       style: AppTextStyle.inputWhite,
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white.withOpacity(0.2),
+          fillColor: widget.isLight
+              ? Colors.white.withOpacity(0.2)
+              : AppColors.darkBlue.withOpacity(0.2),
           border: InputBorder.none,
           hintText: widget.hintText,
           hintStyle: AppTextStyle.inputWhite,
