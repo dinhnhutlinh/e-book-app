@@ -57,7 +57,6 @@ class AuthController extends GetxController {
       EasyLoading.dismiss();
       Get.offNamed(HomePage.route);
     }).onError((error, stackTrace) {
-      print(error);
       EasyLoading.dismiss();
       AppAlertDialog.show(
         title: 'Lỗi',

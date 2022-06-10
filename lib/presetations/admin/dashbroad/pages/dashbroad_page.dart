@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/assets.gen.dart';
+import 'package:e_book_app/presetations/admin/books/pages/books_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/categories_page.dart';
 import 'package:e_book_app/presetations/admin/dashbroad/controller/dashbroad_controller.dart';
 import 'package:e_book_app/presetations/admin/dashbroad/widgets/cat_button.dart';
@@ -139,7 +140,7 @@ class DashbroadPage extends StatelessWidget {
                           trailing: Assets.resources.icons.bookshelf.svg(
                             height: 36,
                           ),
-                          onPress: () {},
+                          onPress: () => Get.toNamed(BooksPage.route),
                         ),
                         const SizedBox(
                           height: 8,

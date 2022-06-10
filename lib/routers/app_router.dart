@@ -1,3 +1,4 @@
+import 'package:e_book_app/presetations/admin/books/pages/books_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/categories_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_page.dart';
 import 'package:e_book_app/presetations/admin/dashbroad/controller/dashbroad_binding.dart';
@@ -35,6 +36,10 @@ class Routes {
       GetPage(
         name: CategoryDetailPage.route,
         page: () => CategoryDetailPage(),
+      ),
+      GetPage(
+        name: BooksPage.route,
+        page: () => BooksPage(),
       ),
     ];
   }

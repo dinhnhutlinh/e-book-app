@@ -1,6 +1,5 @@
 import 'package:e_book_app/models/category.dart';
 import 'package:e_book_app/utils/date_util.dart';
-import 'package:e_book_app/utils/string_util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book.g.dart';

@@ -9,4 +9,11 @@ class BookRepository {
   Future<void> createOrUpdateBook(Book book) async {
     await _reference.doc(book.id).set(book.toJson());
   }
+
+  Future<List<Book>> getAllBook() async {
+    final data = await _reference.get();
+    return data.docs
+        .map((e) => Book.fromJson(e.data() as Map<String, dynamic>))
+        .toList();
+  }
 }
