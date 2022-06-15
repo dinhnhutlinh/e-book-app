@@ -1,98 +1,81 @@
-import 'package:e_book_app/models/user_profile.dart';
-import 'package:e_book_app/repositories/auth_repository.dart';
-import 'package:e_book_app/repositories/user_repository.dart';
 import 'package:e_book_app/utils/exception.dart';
-import 'package:e_book_app/utils/vadidator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService extends GetxService {
-  final _authRepository = AuthRepository();
-  final _userRepository = UserRepository();
-  User? _user;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  @override
-  void onInit() {
-    _user = _authRepository.getUser();
-    super.onInit();
-  }
-
-  String? _signInValidate(String email, String password) {
-    String? mess;
-    final validate = Validator();
-    mess = validate.checkPassword('Mật khẩu', password);
-    mess = validate.isEmail('Email', email);
-    return mess;
-  }
-
-  String? _signUpValidate(String email, String password, String rePassword) {
-    String? mess;
-    final validate = Validator();
-    mess = validate.checkPassword('Mật khẩu', password);
-    mess = validate.isEmail('Email', email);
-    if (password != rePassword) {
-      return 'Mật khẩu không khớp';
-    }
-    return mess;
-  }
-
-  Future signIn({required String email, required String password}) async {
-    String? mess = _signInValidate(email, password);
-    if (mess == null) {
-      await _authRepository
-          .signIn(email: email, password: password)
-          .then((value) async {
-        _user = value;
-        await _userRepository.updateLastSignIn(value?.uid ?? '');
-      }).onError((error, stackTrace) async {
-        if (error is AuthException) {
-          throw AuthException(error.mess);
+  Future<User?> signIn(
+      {required String email, required String password}) async {
+    final userCredential = await _firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .onError((error, stackTrace) {
+      if (error is FirebaseAuthException) {
+        if (error.code == 'user-disabled') {
+          throw AuthException('tài khoản đã bị khóa');
+        } else if (error.code == 'user-not-found') {
+          throw AuthException('Tài khoản không tồn tại');
+        } else if (error.code == 'invalid-email') {
+          throw AuthException('Email không tồn tại');
         }
-      });
-    } else {
-      throw AuthException(mess);
-    }
-  }
-
-  Future<void> signInWithGoogle() async {
-    await _authRepository.signInWithGoogle().then((value) async {
-      _user = value;
-
-      await _userRepository
-          .createUserProfileWithGoogle(UserProfile.fromUser(_user!));
-    }).onError((error, stackTrace) {
-      throw AuthException(error.toString());
+      }
+      throw AuthException('Không thể kết nối mạng');
     });
+    return userCredential.user;
   }
 
-  Future<void> signInWithFacebook() => _authRepository.signInWithFacebook();
-
-  Future<void> signUp(
-      {required String email,
-      required String password,
-      required String rePassword}) async {
-    String? mess = _signUpValidate(email, password, rePassword);
-    if (mess == null) {
-      await _authRepository
-          .signUp(email: email, password: password)
-          .then((value) {
-        _user = value;
-        _userRepository.createUserProfile(UserProfile.fromUser(value!));
-      }).onError(
-        (error, stackTrace) {
-          throw AuthException(error.toString());
-        },
-      );
-    } else {
-      throw AuthException(mess);
-    }
+  Future<User?> signUp(
+      {required String email, required String password}) async {
+    await _firebaseAuth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .onError((error, stackTrace) {
+      if (error is FirebaseAuthException) {
+        if (error.code == 'weak-password') {
+          throw AuthException('mật khẩu quá yếu');
+        } else if (error.code == 'email-already-in-use') {
+          throw AuthException('Email đã được sử dụng');
+        } else if (error.code == 'invalid-email') {
+          throw AuthException('Email không tồn tại');
+        }
+      }
+      throw AuthException('Không thể kết nối');
+    });
+    return _firebaseAuth.currentUser;
   }
+
+  isLogin() => _firebaseAuth.currentUser != null;
 
   void signOut() {
-    _user = null;
-    _authRepository.signOut();
+    _firebaseAuth.signOut();
+    _googleSignIn.signOut();
   }
 
-  User get user => _user!;
-  bool get isLogin => _user != null;
+  Future<User?> signInWithGoogle() async {
+    final googleUser = await _googleSignIn.signIn().onError(
+        (error, stackTrace) => throw AuthException('Không thể kết nối'));
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    return (await _firebaseAuth.signInWithCredential(credential)).user;
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken?.token ?? '');
+
+    // Once signed in, return the UserCredential
+    return _firebaseAuth.signInWithCredential(facebookAuthCredential);
+  }
+
+  User? get user => _firebaseAuth.currentUser;
 }

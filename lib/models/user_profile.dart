@@ -4,9 +4,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user_profile.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserProfile {
-  final String id;
+  final String? id;
   final String? name;
   final String? avatar;
   final String? email;
@@ -16,7 +16,7 @@ class UserProfile {
   final DateTime lastSignin;
 
   UserProfile({
-    required this.id,
+    this.id,
     this.name,
     this.avatar,
     this.email,

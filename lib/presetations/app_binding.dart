@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(AuthService());
-    Get.put(() => BookService());
+    Get.lazyPut(() => AuthService());
+    Get.lazyPut(() => BookService());
     Get.lazyPut(() => UserService());
     Get.lazyPut(() => CategoryService());
   }

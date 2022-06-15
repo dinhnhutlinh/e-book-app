@@ -12,7 +12,7 @@ class UserController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    String uid = _auhtService.user.uid;
+    String uid = _auhtService.user?.uid ?? '';
     _profile = await _userService.getUserProfile(uid);
     _isLoading.value = false;
 

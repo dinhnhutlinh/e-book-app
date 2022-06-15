@@ -1,3 +1,4 @@
+import 'package:e_book_app/presetations/admin/books/pages/book_edit_page.dart';
 import 'package:e_book_app/presetations/admin/books/pages/books_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/categories_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_page.dart';
@@ -6,6 +7,8 @@ import 'package:e_book_app/presetations/admin/dashbroad/pages/dashbroad_page.dar
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/home/controllers/home_binding.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
+import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
+import 'package:e_book_app/presetations/store/pages/book_detail_page.dart';
 import 'package:get/get.dart';
 
 class Routes {
@@ -34,12 +37,24 @@ class Routes {
         page: () => CategoriesPage(),
       ),
       GetPage(
-        name: CategoryDetailPage.route,
-        page: () => CategoryDetailPage(),
+        name: CategoryEditPage.route,
+        page: () => CategoryEditPage(),
       ),
       GetPage(
         name: BooksPage.route,
         page: () => BooksPage(),
+      ),
+      GetPage(
+        name: BookEditPage.route,
+        page: () => BookEditPage(),
+      ),
+      GetPage(
+        name: BookDetailPage.route,
+        page: () => BookDetailPage(),
+      ),
+      GetPage(
+        name: BookViewerPage.route,
+        page: () => BookViewerPage(),
       ),
     ];
   }

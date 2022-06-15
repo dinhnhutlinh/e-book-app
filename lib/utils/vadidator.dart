@@ -1,6 +1,3 @@
-import 'package:injectable/injectable.dart';
-
-@lazySingleton
 class Validator {
   String? isNotNull(String fieldName, dynamic o) {
     if (o == null) {

@@ -1,22 +1,22 @@
 import 'package:e_book_app/common_widget/stateful/input_from.dart';
 import 'package:e_book_app/common_widget/stateless/custom_round_button.dart';
-import 'package:e_book_app/models/category.dart';
-import 'package:e_book_app/presetations/admin/categorys/controller/categories_controller.dart';
+import 'package:e_book_app/models/book.dart';
+import 'package:e_book_app/services/book_service.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
 import 'package:e_book_app/utils/vadidator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryEditPage extends StatelessWidget {
-  static const route = '/CategoryDetail';
-  final _categoriesController = Get.find<CategoriesController>();
-  final Category _category = Get.arguments;
+class BookEditPage extends StatelessWidget {
+  static const route = '/BookEdit';
+  final _bookService = Get.find<BookService>();
+  final Book _category = Get.arguments;
 
   final _nameController = TextEditingController();
   final _keyForm = GlobalKey<FormState>();
 
-  CategoryEditPage({Key? key}) : super(key: key);
+  BookEditPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,12 +90,12 @@ class CategoryEditPage extends StatelessWidget {
                   CustomRoundButton(
                     onPress: () {
                       if (_keyForm.currentState?.validate() ?? false) {
-                        _categoriesController.updateOrCreateCat(
-                          _category.copyWith(
-                            name: _nameController.text,
-                            updateAt: DateTime.now(),
-                          ),
-                        );
+                        // _categoriesController.updateOrCreateCat(
+                        //   _category.copyWith(
+                        //     name: _nameController.text,
+                        //     updateAt: DateTime.now(),
+                        //   ),
+                        // );
                       }
                     },
                     title: 'Lưu',

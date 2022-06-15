@@ -1,27 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_book_app/configs/defind.dart';
 import 'package:e_book_app/models/user_profile.dart';
-import 'package:e_book_app/repositories/user_repository.dart';
 import 'package:e_book_app/services/auth_service.dart';
 import 'package:get/get.dart';
 
 class UserService extends GetxService {
-  final _auhtService = Get.find<AuthService>();
+  final _userRef = FirebaseFirestore.instance.collection(Defind.user);
+
   UserProfile? _profile;
-  final _userRepository = UserRepository();
 
   @override
   Future<void> onInit() async {
-    String uid = _auhtService.user.uid;
-    _profile = await _userRepository.getUserProfile(uid);
+    String uid = Get.find<AuthService>().user?.uid ?? '';
+    _profile = await getUserProfile(uid);
 
     super.onInit();
   }
 
-  void logout() {
-    _auhtService.signOut();
-  }
-
   UserProfile? get profile => _profile;
 
-  Future<UserProfile> getUserProfile(String uid) =>
-      _userRepository.getUserProfile(uid);
+  Future<UserProfile> getUserProfile(String uid) async =>
+      await _userRef.doc(uid).get().then(
+            (value) => UserProfile.fromJson(
+              value.data() as Map<String, dynamic>,
+            ),
+          );
+
+  Future<int> countUser() async =>
+      await _userRef.get().then((value) => value.docs.length);
 }

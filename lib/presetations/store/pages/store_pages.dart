@@ -1,10 +1,16 @@
+import 'package:e_book_app/models/category.dart';
+import 'package:e_book_app/presetations/store/controllers/store_controller.dart';
+import 'package:e_book_app/presetations/store/widget/book_by_category_list.dart';
+import 'package:e_book_app/presetations/store/widget/lastest_book_list.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StorePage extends StatelessWidget {
-  const StorePage({Key? key}) : super(key: key);
+  StorePage({Key? key}) : super(key: key);
+
+  final _storeController = Get.put(StoreController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +60,55 @@ class StorePage extends StatelessWidget {
                 ),
                 width: Get.width,
                 child: ListView(
+                  addAutomaticKeepAlives: true,
                   padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
                   children: [
-                    Text(
-                      'Trend',
-                      style: AppTextStyle.textBlue,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Sách mới nhất',
+                          style: AppTextStyle.textBlue,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const LastestBookList(),
+                    Obx(
+                      () => Column(
+                        children: [
+                          for (Category category in _storeController.category)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    '${category.name}',
+                                    style: AppTextStyle.textBlue,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                BookByCategoryList(
+                                  category: category,
+                                ),
+                              ],
+                            )
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

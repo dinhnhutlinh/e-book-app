@@ -50,7 +50,7 @@ class CategoriesPage extends StatelessWidget {
             child: FloatingActionButton(
               backgroundColor: AppColors.deepOrange,
               onPressed: () => Get.toNamed(
-                CategoryDetailPage.route,
+                CategoryEditPage.route,
                 arguments: Category(
                   id: StringUtil.getRandomString(8),
                 ),
@@ -92,7 +92,7 @@ class CategoriesPage extends StatelessWidget {
                           icon: const Icon(Icons.delete),
                         ),
                         onPress: () => Get.toNamed(
-                          CategoryDetailPage.route,
+                          CategoryEditPage.route,
                           arguments: _categoriesController.categories[index],
                         ),
                       ),

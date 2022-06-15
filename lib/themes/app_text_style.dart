@@ -29,7 +29,7 @@ class AppTextStyle {
 
   static TextStyle labelWhite = GoogleFonts.openSans(
     color: Colors.white,
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: FontWeight.bold,
   );
 

@@ -1,5 +1,5 @@
 class Defind {
-  static const userCollections = 'user';
+  static const user = 'user';
 
   static const category = 'category';
 

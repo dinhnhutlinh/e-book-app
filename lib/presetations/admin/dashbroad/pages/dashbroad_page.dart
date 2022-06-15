@@ -94,97 +94,116 @@ class DashbroadPage extends StatelessWidget {
                     ),
                   ),
                   width: Get.width,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          height: 260,
-                          child: GridView(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 3 / 2,
-                                    crossAxisSpacing: 16,
-                                    mainAxisSpacing: 16),
-                            children: const [
-                              TitleIconButton(
-                                title: 'Số lượng truy cập',
-                                content: '1000',
-                                primaryColor: AppColors.deepOrange,
-                              ),
-                              TitleIconButton(
-                                title: 'Số lượng truy cập trong ngày',
-                                content: '100',
-                                primaryColor: Colors.green,
-                              ),
-                              TitleIconButton(
-                                title: 'Tiền đã thanh toán',
-                                content: '2000',
-                                primaryColor: Colors.blue,
-                              ),
-                              TitleIconButton(
-                                title: 'Số lượng sách',
-                                content: '300',
-                                primaryColor: AppColors.darkBlue,
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ManagerTile(
-                          title: const Text('Quản lý sách'),
-                          subTitle: const Text('Số lượng ${30}'),
-                          trailing: Assets.resources.icons.bookshelf.svg(
-                            height: 36,
-                          ),
-                          onPress: () => Get.toNamed(BooksPage.route),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        ManagerTile(
-                          title: const Text('Quản lý danh mục'),
-                          subTitle: Obx(
-                            () => Text('Số lượng ${_control.countCategories}'),
-                          ),
-                          trailing: Assets.resources.icons.alignLeftTwo.svg(
-                            height: 36,
+                  child: Obx(
+                    () => _control.wasLoad
+                        ? RefreshIndicator(
+                            onRefresh: _control.fetchData,
                             color: AppColors.deepOrange,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    height: 260,
+                                    child: GridView(
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              childAspectRatio: 3 / 2,
+                                              crossAxisSpacing: 16,
+                                              mainAxisSpacing: 16),
+                                      children: const [
+                                        TitleIconButton(
+                                          title: 'Số lượng truy cập',
+                                          content: '1000',
+                                          primaryColor: AppColors.deepOrange,
+                                        ),
+                                        TitleIconButton(
+                                          title: 'Số lượng truy cập trong ngày',
+                                          content: '100',
+                                          primaryColor: Colors.green,
+                                        ),
+                                        TitleIconButton(
+                                          title: 'Tiền đã thanh toán',
+                                          content: '2000',
+                                          primaryColor: Colors.blue,
+                                        ),
+                                        TitleIconButton(
+                                          title: 'Số lượng sách',
+                                          content: '300',
+                                          primaryColor: AppColors.darkBlue,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  ManagerTile(
+                                    title: const Text('Quản lý sách'),
+                                    subTitle:
+                                        Text('Số lượng ${_control.countBooks}'),
+                                    trailing:
+                                        Assets.resources.icons.bookshelf.svg(
+                                      height: 36,
+                                    ),
+                                    onPress: () => Get.toNamed(BooksPage.route),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  ManagerTile(
+                                    title: const Text('Quản lý danh mục'),
+                                    subTitle: Text(
+                                      'Số lượng ${_control.countCategory}',
+                                    ),
+                                    trailing:
+                                        Assets.resources.icons.alignLeftTwo.svg(
+                                      height: 36,
+                                      color: AppColors.deepOrange,
+                                    ),
+                                    onPress: () => Get.toNamed(
+                                      CategoriesPage.name,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  ManagerTile(
+                                    title: const Text('Quản lý tác giả'),
+                                    subTitle: const Text('Số lượng ${30}'),
+                                    trailing:
+                                        Assets.resources.icons.idCardH.svg(
+                                      height: 36,
+                                    ),
+                                    onPress: () {},
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  ManagerTile(
+                                    title: const Text('Quản lý người dùng'),
+                                    subTitle:
+                                        Text('Số lượng ${_control.countUser}'),
+                                    trailing: Assets
+                                        .resources.icons.personalPrivacy
+                                        .svg(
+                                      height: 36,
+                                    ),
+                                    onPress: () {},
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.deepOrange,
+                            ),
                           ),
-                          onPress: () => Get.toNamed(
-                            CategoriesPage.name,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        ManagerTile(
-                          title: const Text('Quản lý tác giả'),
-                          subTitle: const Text('Số lượng ${30}'),
-                          trailing: Assets.resources.icons.idCardH.svg(
-                            height: 36,
-                          ),
-                          onPress: () {},
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        ManagerTile(
-                          title: const Text('Quản lý người dùng'),
-                          subTitle: const Text('Số lượng '),
-                          trailing: Assets.resources.icons.personalPrivacy.svg(
-                            height: 36,
-                          ),
-                          onPress: () {},
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ),

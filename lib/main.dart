@@ -46,8 +46,9 @@ class MyApp extends StatelessWidget {
       builder: EasyLoading.init(),
       getPages: Routes.router(),
       initialBinding: AppBinding(),
-      initialRoute:
-          Get.find<AuthService>().isLogin ? HomePage.route : SignInPage.route,
+      initialRoute: Get.find<AuthService>().user != null
+          ? HomePage.route
+          : SignInPage.route,
     );
   }
 }

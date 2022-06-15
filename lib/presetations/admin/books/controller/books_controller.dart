@@ -27,9 +27,23 @@ class BooksController extends GetxController {
       }
     });
 
-    fetchData();
+    await fetchData();
+    // changeURLBook();
+
     super.onInit();
   }
+
+  // Future<void> changeURLBook() async {
+  //   final storageRef = FirebaseStorage.instance.ref();
+  //   for (var book in _books) {
+  //     final imageRef = storageRef.child(
+  //         'images/image-${VnCharactorUtil.removeAccent(book.name ?? '')}');
+
+  //     book.linkImgOnl = await imageRef.getDownloadURL();
+
+  //     _bookServices.updataBook(book: book);
+  //   }
+  // }
 
   bool get wasLoad => _wasLoad.value;
 
@@ -40,7 +54,7 @@ class BooksController extends GetxController {
   }
 
   void query(String value) {
-    _books.value = _bookServices.books
+    _books.value = _books
         .where((element) => element.name?.contains(value) ?? false)
         .toList();
   }

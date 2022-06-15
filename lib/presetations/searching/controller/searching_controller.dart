@@ -1,0 +1,3 @@
+class SearchingController {
+  String query = '';
+}

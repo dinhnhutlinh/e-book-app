@@ -26,7 +26,7 @@ class CategoriesController extends GetxController {
       }
     });
 
-    fetchData();
+    await fetchData();
     super.onInit();
   }
 
@@ -44,7 +44,7 @@ class CategoriesController extends GetxController {
 
   Future<void> updateOrCreateCat(Category category) async {
     EasyLoading.show();
-    await _categoryServices.updateOrCrateCat(category).then((value) async {
+    await _categoryServices.addCat(category).then((value) async {
       _items.removeWhere((element) => element.id == category.id);
       _items.add(category);
       _items.sort(
@@ -82,7 +82,7 @@ class CategoriesController extends GetxController {
       ),
     );
     if (confirm ?? false) {
-      await _categoryServices.deteleCat(category).then((value) {
+      await _categoryServices.deleteCat(category).then((value) {
         _items.remove(category);
       });
     }

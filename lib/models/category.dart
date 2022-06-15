@@ -1,18 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:e_book_app/utils/date_util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'category.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Category {
-  String id;
+  String? id;
   String? name;
   @TimestampConverter()
   DateTime? updateAt;
 
   Category({
-    required this.id,
+    this.id,
     this.name,
     this.updateAt,
   });

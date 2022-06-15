@@ -1,12 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:json_annotation/json_annotation.dart';
+
 import 'package:e_book_app/models/category.dart';
 import 'package:e_book_app/utils/date_util.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'book.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Book {
-  String id;
+  String? id;
   String? name;
   int? price;
   Category? category;
@@ -18,7 +20,7 @@ class Book {
   @TimestampConverter()
   DateTime? updateAt;
   Book({
-    required this.id,
+    this.id,
     this.name,
     this.price,
     this.category,
@@ -32,4 +34,9 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);
+
+  @override
+  String toString() {
+    return 'Book(id: $id, name: $name, price: $price, category: $category, author: $author, content: $content, linkfileOnl: $linkfileOnl, linkImgOnl: $linkImgOnl, url: $url, updateAt: $updateAt)';
+  }
 }

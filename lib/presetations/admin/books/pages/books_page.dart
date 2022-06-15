@@ -1,6 +1,6 @@
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/admin/books/controller/books_controller.dart';
-import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_page.dart';
+import 'package:e_book_app/presetations/admin/books/pages/book_edit_page.dart';
 import 'package:e_book_app/presetations/admin/dashbroad/widgets/manager_tile.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
@@ -40,7 +40,7 @@ class BooksPage extends StatelessWidget {
             color: AppColors.white,
           ),
           title: Text(
-            'Danh mục',
+            'Sách',
             style: AppTextStyle.headerWhite,
           ),
         ),
@@ -50,7 +50,7 @@ class BooksPage extends StatelessWidget {
             child: FloatingActionButton(
               backgroundColor: AppColors.deepOrange,
               onPressed: () => Get.toNamed(
-                CategoryDetailPage.route,
+                BookEditPage.route,
                 arguments: Book(
                   id: StringUtil.getRandomString(8),
                 ),
@@ -134,7 +134,7 @@ class BooksPage extends StatelessWidget {
                                   'ID: ${_bookController.books[index].id} '),
                               trailing: const Icon(Icons.edit),
                               onPress: () => Get.toNamed(
-                                CategoryDetailPage.route,
+                                BookEditPage.route,
                                 arguments: _bookController.books[index],
                               ),
                             ),
