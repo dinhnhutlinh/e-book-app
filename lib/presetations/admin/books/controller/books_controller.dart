@@ -1,5 +1,7 @@
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/services/book_service.dart';
+import 'package:e_book_app/utils/vn_charactor_util.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -33,17 +35,20 @@ class BooksController extends GetxController {
     super.onInit();
   }
 
-  // Future<void> changeURLBook() async {
-  //   final storageRef = FirebaseStorage.instance.ref();
-  //   for (var book in _books) {
-  //     final imageRef = storageRef.child(
-  //         'images/image-${VnCharactorUtil.removeAccent(book.name ?? '')}');
+  Future<void> changeURLBook() async {
+    final storageRef = FirebaseStorage.instance.ref();
+    for (var book in _books) {
+      final imageRef = storageRef.child(
+          'images/image-${VnCharactorUtil.removeAccent(book.name ?? '')}.png');
+      final thumbnailRef = storageRef.child(
+          'thumbnail/thumbnail-${VnCharactorUtil.removeAccent(book.name ?? '')}.png');
 
-  //     book.linkImgOnl = await imageRef.getDownloadURL();
+      book.linkImgOnl = await imageRef.getDownloadURL();
+      book.linkThumbnail = await thumbnailRef.getDownloadURL();
 
-  //     _bookServices.updataBook(book: book);
-  //   }
-  // }
+      _bookServices.updataBook(book: book);
+    }
+  }
 
   bool get wasLoad => _wasLoad.value;
 

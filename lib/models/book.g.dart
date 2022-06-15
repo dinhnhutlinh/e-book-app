@@ -17,6 +17,7 @@ Book _$BookFromJson(Map<String, dynamic> json) => Book(
       content: json['content'] as String?,
       linkfileOnl: json['linkfileOnl'] as String?,
       linkImgOnl: json['linkImgOnl'] as String?,
+      linkThumbnail: json['linkThumbnail'] as String?,
       url: json['url'] as String?,
       updateAt: json['updateAt'] == null
           ? null
@@ -32,6 +33,7 @@ Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{
       'content': instance.content,
       'linkfileOnl': instance.linkfileOnl,
       'linkImgOnl': instance.linkImgOnl,
+      'linkThumbnail': instance.linkThumbnail,
       'url': instance.url,
       'updateAt': instance.updateAt?.toIso8601String(),
     };

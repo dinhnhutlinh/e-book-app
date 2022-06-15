@@ -5,26 +5,6 @@ import 'package:get/get.dart';
 
 class BookService extends GetxService {
   final bookRef = FirebaseFirestore.instance.collection(Defind.book);
-  @override
-  Future<void> onInit() async {
-    // final books = await getAllBook();
-    // for (var element in books) {
-    //   final cate = await bookRef
-    //       .doc(element.id)
-    //       .collection('category')
-    //       .get()
-    //       .then((value) {
-    //     return Category.fromJson(
-    //       value.docs.first.data(),
-    //     );
-    //   });
-    //   await bookRef.doc(element.id).set({'categoryId': cate.id});
-    //   // await bookRef.doc(element.id)
-
-    // }
-
-    super.onInit();
-  }
 
   Future<List<Book>> getAllBook() async =>
       (await bookRef.get()).docs.map((e) => Book.fromJson(e.data())).toList();
@@ -60,7 +40,10 @@ class BookService extends GetxService {
           .map((e) => Book.fromJson(e.data()))
           .toList();
 
-  Future<void> updataBook({required Book book}) async {}
+  Future<void> updataBook({required Book book}) async {
+    await bookRef.doc(book.id).set(book.toJson());
+  }
+
   Future<bool> wasLike({required String bookId, required String userId}) async {
     return (await bookRef
             .where('id', isEqualTo: bookId)

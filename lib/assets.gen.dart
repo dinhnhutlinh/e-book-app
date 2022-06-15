@@ -50,6 +50,10 @@ class $ResourcesIconsGen {
   /// File path: resources/icons/like.svg
   SvgGenImage get like => const SvgGenImage('resources/icons/like.svg');
 
+  /// File path: resources/icons/like_fill.svg
+  SvgGenImage get likeFill =>
+      const SvgGenImage('resources/icons/like_fill.svg');
+
   /// File path: resources/icons/personal-privacy.svg
   SvgGenImage get personalPrivacy =>
       const SvgGenImage('resources/icons/personal-privacy.svg');

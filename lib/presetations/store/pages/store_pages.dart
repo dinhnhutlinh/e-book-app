@@ -1,3 +1,4 @@
+import 'package:e_book_app/assets.gen.dart';
 import 'package:e_book_app/models/category.dart';
 import 'package:e_book_app/presetations/store/controllers/store_controller.dart';
 import 'package:e_book_app/presetations/store/widget/book_by_category_list.dart';
@@ -37,10 +38,9 @@ class StorePage extends StatelessWidget {
                     fillColor: Colors.white.withOpacity(0.2),
                     padding: const EdgeInsets.all(8),
                     shape: const CircleBorder(),
-                    child: const Icon(
-                      Icons.find_in_page,
+                    child: Assets.resources.icons.search.svg(
                       color: AppColors.white,
-                      size: 24.0,
+                      height: 24,
                     ),
                   )
                 ],
@@ -61,12 +61,11 @@ class StorePage extends StatelessWidget {
                 width: Get.width,
                 child: ListView(
                   addAutomaticKeepAlives: true,
-                  padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
                         child: Text(
                           'Sách mới nhất',
                           style: AppTextStyle.textBlue,
@@ -76,7 +75,7 @@ class StorePage extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    const LastestBookList(),
+                    LastestBookList(),
                     Obx(
                       () => Column(
                         children: [
@@ -98,7 +97,7 @@ class StorePage extends StatelessWidget {
                                   height: 8,
                                 ),
                                 BookByCategoryList(
-                                  category: category,
+                                  categoryId: category.id ?? '',
                                 ),
                               ],
                             )

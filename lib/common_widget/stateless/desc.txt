@@ -1,1 +1,0 @@
-chứa các widget custom có nhiều 1 state

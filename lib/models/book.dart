@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:json_annotation/json_annotation.dart';
-
 import 'package:e_book_app/models/category.dart';
 import 'package:e_book_app/utils/date_util.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'book.g.dart';
 
@@ -16,6 +15,7 @@ class Book {
   String? content;
   String? linkfileOnl;
   String? linkImgOnl;
+  String? linkThumbnail;
   String? url;
   @TimestampConverter()
   DateTime? updateAt;
@@ -28,6 +28,7 @@ class Book {
     this.content,
     this.linkfileOnl,
     this.linkImgOnl,
+    this.linkThumbnail,
     this.url,
     this.updateAt,
   });
@@ -37,6 +38,6 @@ class Book {
 
   @override
   String toString() {
-    return 'Book(id: $id, name: $name, price: $price, category: $category, author: $author, content: $content, linkfileOnl: $linkfileOnl, linkImgOnl: $linkImgOnl, url: $url, updateAt: $updateAt)';
+    return 'Book(id: $id, name: $name, price: $price, category: $category, author: $author, content: $content, linkfileOnl: $linkfileOnl, linkImgOnl: $linkImgOnl, linkThumbnail: $linkThumbnail, url: $url, updateAt: $updateAt)';
   }
 }
