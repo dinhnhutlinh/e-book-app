@@ -4,7 +4,7 @@ import 'package:e_book_app/models/category.dart';
 import 'package:get/get.dart';
 
 class CategoryService extends GetxService {
-  final categoryRef = FirebaseFirestore.instance.collection(Defind.category);
+  final categoryRef = FirebaseFirestore.instance.collection(Define.category);
   // final _categoriesRepository = CategoryRepository();
   // List<Category> cats = [];
 

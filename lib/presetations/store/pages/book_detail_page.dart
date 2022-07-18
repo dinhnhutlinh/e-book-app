@@ -45,54 +45,48 @@ class BookDetailPage extends StatelessWidget {
                     : _bookDetailController.likeBook,
                 icon: _bookDetailController.wasLike
                     ? Assets.resources.icons.like.svg()
-                    : Assets.resources.icons.book.svg(),
+                    : Assets.resources.icons.likeFill
+                        .svg(color: AppColors.white),
               ),
             )
           ],
         ),
-        body: Stack(
-          children: [
-            SizedBox(
-              height: 336,
-              child: Column(
-                children: [
-                  _cardBook(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                ],
-              ),
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: _cardBook(),
             ),
-            SingleChildScrollView(
-                child: Padding(
-              padding: const EdgeInsets.only(top: 336),
-              child: Container(
-                height: Get.height - 336,
-                decoration: const BoxDecoration(
-                  color: AppColors.blueBackground,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
-                ),
-                padding: const EdgeInsets.all(16),
-                child: ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    const SizedBox(
-                      child: ListTile(
-                        title: Text("Nội dung"),
-                      ),
-                    ),
-                    Text(
-                      _bookDetailController.book.content ?? '',
-                    ),
-                  ],
-                ),
-              ),
-            )),
+            SliverFillRemaining(
+              child: _cardReview(),
+            )
           ],
         ),
+      ),
+    );
+  }
+
+  _cardReview() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppColors.blueBackground,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          const SizedBox(
+            child: ListTile(
+              title: Text("Nội dung"),
+            ),
+          ),
+          Text(
+            _bookDetailController.book.content ?? '',
+          ),
+        ],
       ),
     );
   }
@@ -193,10 +187,12 @@ class BookDetailPage extends StatelessWidget {
             height: 8,
           ),
           CustomRoundButton(
-              onPress: () => Get.toNamed(
-                    BookViewerPage.route,
-                    arguments: _bookDetailController.book,
-                  ),
+              onPress: () {
+                Get.toNamed(
+                  BookViewerPage.route,
+                  arguments: _bookDetailController.book,
+                );
+              },
               title: 'Đọc miễn phí'),
           const SizedBox(
             height: 16,
@@ -204,6 +200,9 @@ class BookDetailPage extends StatelessWidget {
           CustomRoundButton(
             onPress: () {},
             title: 'Mua với giá ${_bookDetailController.book.price ?? ''} VND',
+          ),
+          const SizedBox(
+            height: 32,
           ),
         ],
       ),

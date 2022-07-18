@@ -1,7 +1,7 @@
 import 'package:e_book_app/models/category.dart';
 import 'package:e_book_app/presetations/admin/categorys/controller/categories_controller.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_page.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/widgets/manager_tile.dart';
+import 'package:e_book_app/presetations/admin/dashboard/widgets/manager_tile.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
 import 'package:e_book_app/utils/string_util.dart';

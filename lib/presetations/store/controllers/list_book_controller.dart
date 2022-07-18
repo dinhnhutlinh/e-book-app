@@ -3,18 +3,22 @@ import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/services/book_service.dart';
 import 'package:get/get.dart';
 
-class ListBookController extends GetxController {
+class ListBookController extends GetxController with StateMixin {
   final String? categoryId;
   final _bookService = Get.find<BookService>();
-  final limit = 10;
+  final limit = 5;
   final RxList<Book> _books = <Book>[].obs;
+
   ListBookController({
     this.categoryId,
   });
-
   @override
   void onInit() {
     super.onInit();
+    _fetchData();
+  }
+
+  _fetchData() {
     if (categoryId != null) {
       _bookService
           .loadBookByCat(
@@ -22,20 +26,14 @@ class ListBookController extends GetxController {
               paging: 0,
               limit: limit,
               currnerIndex: _books.length)
-          .then((value) async {
-        for (var book in value) {
-          _books.add(book);
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
+          .then((value) {
+        _books.value = value;
       });
     } else {
       _bookService
           .loadLastBook(paging: 0, limit: 20, currnerIndex: _books.length)
-          .then((value) async {
-        for (var book in value) {
-          _books.add(book);
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
+          .then((value) {
+        _books.value = value;
       });
     }
   }

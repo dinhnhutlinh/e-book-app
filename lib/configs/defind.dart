@@ -1,4 +1,4 @@
-class Defind {
+class Define {
   static const user = 'user';
 
   static const category = 'category';

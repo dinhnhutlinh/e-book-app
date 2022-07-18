@@ -1,7 +1,10 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/routers/app_router.dart';
 import 'package:e_book_app/services/auth_service.dart';
+import 'package:e_book_app/utils/color_schemes.g.dart';
+import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -39,16 +42,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      builder: EasyLoading.init(),
-      getPages: Routes.router(),
-      initialBinding: AppBinding(),
-      initialRoute: Get.find<AuthService>().user != null
-          ? HomePage.route
-          : SignInPage.route,
-    );
+    return DynamicColorBuilder(
+        builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+      ColorScheme lightScheme;
+      ColorScheme darkScheme;
+
+      if (lightDynamic != null && darkDynamic != null) {
+        lightScheme = lightDynamic.harmonized();
+        lightCustomColors = lightCustomColors.harmonized(lightScheme);
+
+        // Repeat for the dark color scheme.
+        darkScheme = darkDynamic.harmonized();
+        darkCustomColors = darkCustomColors.harmonized(darkScheme);
+      } else {
+        // Otherwise, use fallback schemes.
+        lightScheme = lightColorScheme;
+        darkScheme = darkColorScheme;
+      }
+
+      return GetMaterialApp(
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: lightScheme,
+          extensions: [lightCustomColors],
+        ),
+        darkTheme: ThemeData(
+          useMaterial3: true,
+          colorScheme: darkScheme,
+          extensions: [darkCustomColors],
+        ),
+        builder: EasyLoading.init(),
+        getPages: Routes.router(),
+        initialBinding: AppBinding(),
+        initialRoute: Get.find<AuthService>().user != null
+            ? HomePage.route
+            : SignInPage.route,
+      );
+    });
   }
 }

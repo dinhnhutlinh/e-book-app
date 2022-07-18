@@ -1,10 +1,8 @@
-import 'package:e_book_app/assets.gen.dart';
-import 'package:e_book_app/models/category.dart';
+import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/store/controllers/store_controller.dart';
-import 'package:e_book_app/presetations/store/widget/book_by_category_list.dart';
+import 'package:e_book_app/presetations/store/widget/book_card.dart';
 import 'package:e_book_app/presetations/store/widget/lastest_book_list.dart';
-import 'package:e_book_app/themes/app_colors.dart';
-import 'package:e_book_app/themes/app_text_style.dart';
+import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,101 +13,111 @@ class StorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 16,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: const Text('Expolse'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 16, left: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Khám phá',
-                    style: AppTextStyle.headerWhite,
-                  ),
-                  RawMaterialButton(
-                    onPressed: () {},
-                    elevation: 0,
-                    fillColor: Colors.white.withOpacity(0.2),
-                    padding: const EdgeInsets.all(8),
-                    shape: const CircleBorder(),
-                    child: Assets.resources.icons.search.svg(
-                      color: AppColors.white,
-                      height: 24,
-                    ),
-                  )
-                ],
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: _storeController.obx(
+              onLoading: const Center(
+                child: CircularProgressIndicator(),
               ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.blueBackground,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
-                ),
-                width: Get.width,
-                child: ListView(
-                  addAutomaticKeepAlives: true,
+              onError: (error) => Center(
+                child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          'Sách mới nhất',
-                          style: AppTextStyle.textBlue,
-                        ),
-                      ),
-                    ),
+                    const Text('Error'),
                     const SizedBox(
                       height: 8,
                     ),
-                    LastestBookList(),
-                    Obx(
-                      () => Column(
-                        children: [
-                          for (Category category in _storeController.category)
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    '${category.name}',
-                                    style: AppTextStyle.textBlue,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                BookByCategoryList(
-                                  categoryId: category.id ?? '',
-                                ),
-                              ],
-                            )
-                        ],
-                      ),
-                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(),
+                      onPressed: _storeController.onInit,
+                      child: const Text('Retry'),
+                    )
                   ],
                 ),
               ),
+              (state) => SingleChildScrollView(
+                child: Obx(
+                  () => Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            'News books',
+                            style: textTheme.titleLarge,
+                          ),
+                        ),
+                      ),
+                      LastestBookList(),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12, bottom: 12),
+                          child: Text(
+                            'Category',
+                            style: textTheme.titleMedium,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 42,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.only(
+                            left: 12,
+                          ),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _storeController.categories.length,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: customcolor1,
+                                // Foreground color
+                                onPrimary:
+                                    Theme.of(context).colorScheme.onPrimary,
+                              ).copyWith(
+                                  elevation: ButtonStyleButton.allOrNull(0.0)),
+                              onPressed: () {},
+                              child: Text(
+                                _storeController.categories[index].name ?? '',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      for (Book book in _storeController.books)
+                        BookCard(book: book),
+                      if (_storeController.isLoadMore)
+                        const Center(child: CircularProgressIndicator()),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

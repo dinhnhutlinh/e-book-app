@@ -4,7 +4,7 @@ import 'package:e_book_app/models/book.dart';
 import 'package:get/get.dart';
 
 class BookService extends GetxService {
-  final bookRef = FirebaseFirestore.instance.collection(Defind.book);
+  final bookRef = FirebaseFirestore.instance.collection(Define.book);
 
   Future<List<Book>> getAllBook() async =>
       (await bookRef.get()).docs.map((e) => Book.fromJson(e.data())).toList();
@@ -65,5 +65,39 @@ class BookService extends GetxService {
     await bookRef.doc(bookId).update({
       'likes': FieldValue.arrayRemove([userId]),
     });
+  }
+
+  Future<List<Book>> searchWithQuery({required String query}) async {
+    return await bookRef
+        .where(
+          ['name', 'content'],
+          isGreaterThanOrEqualTo: query,
+        )
+        .get()
+        .then(
+          (snapshot) => snapshot.docs
+              .map(
+                (e) => Book.fromJson(e.data()),
+              )
+              .toList(),
+        );
+  }
+
+  Future<List<Book>> getBooks(
+      {required int index, required int padding}) async {
+    return await bookRef
+        .orderBy(
+          'updateAt',
+          descending: true,
+        )
+        .limit(padding)
+        .get()
+        .then(
+          (snapshot) => snapshot.docs
+              .map(
+                (e) => Book.fromJson(e.data()),
+              )
+              .toList(),
+        );
   }
 }

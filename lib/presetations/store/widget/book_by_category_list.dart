@@ -15,6 +15,7 @@ class BookByCategoryList extends StatelessWidget {
     return SizedBox(
       height: 192,
       child: ListView.builder(
+        padding: const EdgeInsets.only(left: 16),
         scrollDirection: Axis.horizontal,
         itemCount: _controller.books.length,
         itemBuilder: (context, index) => Padding(

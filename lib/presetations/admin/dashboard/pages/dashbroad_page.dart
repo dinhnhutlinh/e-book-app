@@ -2,19 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/assets.gen.dart';
 import 'package:e_book_app/presetations/admin/books/pages/books_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/categories_page.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/controller/dashbroad_controller.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/widgets/cat_button.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/widgets/manager_tile.dart';
+import 'package:e_book_app/presetations/admin/dashboard/controller/dashbroad_controller.dart';
+import 'package:e_book_app/presetations/admin/dashboard/widgets/cat_button.dart';
+import 'package:e_book_app/presetations/admin/dashboard/widgets/manager_tile.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DashbroadPage extends StatelessWidget {
+class DashboardPage extends StatelessWidget {
   static const name = '/Dashbroad';
 
-  DashbroadPage({Key? key}) : super(key: key);
+  DashboardPage({Key? key}) : super(key: key);
 
   final _control = Get.find<DashbroadController>();
 
@@ -49,7 +49,7 @@ class DashbroadPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Dashbroad',
+                      'Dashboard',
                       style: AppTextStyle.headerWhite,
                     ),
                     RawMaterialButton(

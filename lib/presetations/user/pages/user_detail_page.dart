@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/assets.gen.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/pages/dashbroad_page.dart';
+import 'package:e_book_app/presetations/admin/dashboard/pages/dashbroad_page.dart';
 import 'package:e_book_app/presetations/user/controllers/user_controller.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:e_book_app/themes/app_text_style.dart';
@@ -89,7 +89,7 @@ class UserDetailPage extends StatelessWidget {
                                 if (_userControl.profile?.isAdmin ?? false)
                                   TextButton(
                                     onPressed: () =>
-                                        Get.offNamed(DashbroadPage.name),
+                                        Get.offNamed(DashboardPage.name),
                                     child: Text(
                                       'Vào bản điều khiển',
                                       style: AppTextStyle.textBlue,

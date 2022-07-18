@@ -5,7 +5,7 @@ import 'package:e_book_app/services/auth_service.dart';
 import 'package:get/get.dart';
 
 class UserService extends GetxService {
-  final _userRef = FirebaseFirestore.instance.collection(Defind.user);
+  final _userRef = FirebaseFirestore.instance.collection(Define.user);
 
   UserProfile? _profile;
 

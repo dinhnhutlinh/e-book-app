@@ -12,7 +12,7 @@ class LastestBookList extends StatelessWidget {
       child: Obx(
         () => ListView.builder(
           padding: const EdgeInsets.only(
-            left: 16,
+            left: 12,
           ),
           scrollDirection: Axis.horizontal,
           itemCount: _controller.books.length,

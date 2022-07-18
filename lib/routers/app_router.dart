@@ -2,12 +2,15 @@ import 'package:e_book_app/presetations/admin/books/pages/book_edit_page.dart';
 import 'package:e_book_app/presetations/admin/books/pages/books_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/categories_page.dart';
 import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_page.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/controller/dashbroad_binding.dart';
-import 'package:e_book_app/presetations/admin/dashbroad/pages/dashbroad_page.dart';
+import 'package:e_book_app/presetations/admin/dashboard/controller/dashbroad_binding.dart';
+import 'package:e_book_app/presetations/admin/dashboard/pages/dashbroad_page.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/home/controllers/home_binding.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
+import 'package:e_book_app/presetations/reading/binding/book_viewer_binding.dart';
 import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
+import 'package:e_book_app/presetations/searching/binding/seaching_book_binding.dart';
+import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
 import 'package:e_book_app/presetations/store/pages/book_detail_page.dart';
 import 'package:get/get.dart';
 
@@ -28,9 +31,9 @@ class Routes {
         binding: HomeBinding(),
       ),
       GetPage(
-        name: DashbroadPage.name,
-        page: () => DashbroadPage(),
-        binding: DashbroadBinding(),
+        name: DashboardPage.name,
+        page: () => DashboardPage(),
+        binding: DashboardBinding(),
       ),
       GetPage(
         name: CategoriesPage.name,
@@ -54,7 +57,13 @@ class Routes {
       ),
       GetPage(
         name: BookViewerPage.route,
-        page: () => BookViewerPage(),
+        page: () => const BookViewerPage(),
+        binding: BookViewerBinding(),
+      ),
+      GetPage(
+        name: SearchingPage.route,
+        page: () => SearchingPage(),
+        binding: SearchingBookBinding(),
       ),
     ];
   }
