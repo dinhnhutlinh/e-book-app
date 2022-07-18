@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
           colorScheme: darkScheme,
           extensions: [darkCustomColors],
         ),
+        themeMode: ThemeMode.dark,
         builder: EasyLoading.init(),
         getPages: Routes.router(),
         initialBinding: AppBinding(),

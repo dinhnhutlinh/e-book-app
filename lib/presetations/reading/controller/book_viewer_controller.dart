@@ -8,8 +8,6 @@ import 'package:get/get.dart';
 
 class BookViewerController extends GetxController with StateMixin {
   final Book book = Get.arguments;
-  // PDFDocument? _document;
-  // late final pathSave;
 
   late Uint8List _pdfData;
 

@@ -5,14 +5,14 @@ import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_pa
 import 'package:e_book_app/presetations/admin/dashboard/controller/dashbroad_binding.dart';
 import 'package:e_book_app/presetations/admin/dashboard/pages/dashbroad_page.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
+import 'package:e_book_app/presetations/book_detail/bindings/book_detail_binding.dart';
+import 'package:e_book_app/presetations/book_detail/presentations/pages/book_detail_page.dart';
 import 'package:e_book_app/presetations/home/controllers/home_binding.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/presetations/reading/binding/book_viewer_binding.dart';
 import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
 import 'package:e_book_app/presetations/searching/binding/seaching_book_binding.dart';
 import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
-import 'package:e_book_app/presetations/store/binding/book_detail_binding.dart';
-import 'package:e_book_app/presetations/store/pages/book_detail_page.dart';
 import 'package:get/get.dart';
 
 class Routes {
@@ -60,12 +60,12 @@ class Routes {
       ),
       GetPage(
         name: SearchingPage.route,
-        page: () => SearchingPage(),
+        page: () => const SearchingPage(),
         binding: SearchingBookBinding(),
       ),
       GetPage(
         name: BookDetailPage.route,
-        page: () => BookDetailPage(),
+        page: () => const BookDetailPage(),
         binding: BookDetailBinding(),
       )
     ];

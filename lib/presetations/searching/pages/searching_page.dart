@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 
 class SearchingPage extends GetView<SearchingController> {
   static const route = '/Searching';
+
+  const SearchingPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

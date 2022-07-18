@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_book_app/configs/defind.dart';
 import 'package:e_book_app/models/book.dart';
+import 'package:e_book_app/models/review.dart';
 import 'package:get/get.dart';
 
 class BookService extends GetxService {
@@ -75,11 +76,8 @@ class BookService extends GetxService {
         )
         .get()
         .then(
-          (snapshot) => snapshot.docs
-              .map(
-                (e) => Book.fromJson(e.data()),
-              )
-              .toList(),
+          (snapshot) =>
+              snapshot.docs.map((e) => Book.fromJson(e.data())).toList(),
         );
   }
 
@@ -92,12 +90,42 @@ class BookService extends GetxService {
         )
         .limit(padding)
         .get()
-        .then(
-          (snapshot) => snapshot.docs
-              .map(
-                (e) => Book.fromJson(e.data()),
-              )
-              .toList(),
-        );
+        .then((snapshot) =>
+            snapshot.docs.map((e) => Book.fromJson(e.data())).toList());
+  }
+
+  Future<List<Review>> getAllReview(String bookId) async {
+    return await bookRef
+        .doc('bookId')
+        .collection('reviews')
+        .orderBy('update')
+        .get()
+        .then((value) =>
+            value.docs.map((e) => Review.fromJson(e.data())).toList());
+  }
+
+  Future<Review?> getOwnReview(String uid) async {
+    return await bookRef
+        .doc('bookId')
+        .collection('reviews')
+        .where('user.uid', isEqualTo: uid)
+        .get()
+        .then((value) {
+      if (value.docs.isEmpty) {
+        return null;
+      }
+      return Review.fromJson(value.docs.first.data());
+    });
+  }
+
+  Future<void> addReview(
+      {required Book book,
+      required Review review,
+      required String userId}) async {
+    await bookRef
+        .doc(book.id)
+        .collection('review')
+        .doc(userId)
+        .set(review.toJson());
   }
 }

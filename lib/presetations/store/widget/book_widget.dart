@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/models/book.dart';
-import 'package:e_book_app/presetations/store/pages/book_detail_page.dart';
+import 'package:e_book_app/presetations/book_detail/presentations/pages/book_detail_page.dart';
 import 'package:e_book_app/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

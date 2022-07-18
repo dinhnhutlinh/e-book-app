@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 
 class LastestBookList extends StatelessWidget {
   final _controller = Get.put(ListBookController(), tag: 'last');
+
+  LastestBookList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

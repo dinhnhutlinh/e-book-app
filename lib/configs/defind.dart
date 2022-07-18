@@ -4,4 +4,6 @@ class Define {
   static const category = 'category';
 
   static const book = 'book';
+
+  static const review = 'review';
 }
