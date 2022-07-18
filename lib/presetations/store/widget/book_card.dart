@@ -10,58 +10,78 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    return Card(
-      color: colorScheme.onPrimary,
-      clipBehavior: Clip.none,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.outline,
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            height: 192 / 1.2,
-            width: 128 / 1.2,
-            child: CachedNetworkImage(
-              imageUrl: book.linkImgOnl ?? '',
-            ),
+    return SizedBox(
+      height: 182,
+      child: Card(
+        color: colorScheme.onPrimary,
+        clipBehavior: Clip.antiAlias,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
           ),
-          Expanded(
-            child: SizedBox(
-              height: 192 / 1.2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            book.name ?? '',
-                            style: textTheme.headline6,
-                          ),
-                          subtitle: Text(
-                            book.category?.name ?? '',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ButtonBar(
-                    // buttonPadding: EdgeInsets.zero,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text('Download'))
-                    ],
-                  )
-                ],
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              child: CachedNetworkImage(
+                imageUrl: book.linkImgOnl ?? '',
+                fit: BoxFit.fill,
               ),
             ),
-          )
-        ],
+            Expanded(
+              child: SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              book.name ?? '',
+                              style: textTheme.titleMedium,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            subtitle: ListBody(
+                              children: [
+                                Text(
+                                  book.category?.name ?? '',
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  '\$ ${book.price}',
+                                  style: textTheme.bodyText1,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      height: 0.1,
+                    ),
+                    ButtonBar(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Download',
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -11,6 +11,7 @@ import 'package:e_book_app/presetations/reading/binding/book_viewer_binding.dart
 import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
 import 'package:e_book_app/presetations/searching/binding/seaching_book_binding.dart';
 import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
+import 'package:e_book_app/presetations/store/binding/book_detail_binding.dart';
 import 'package:e_book_app/presetations/store/pages/book_detail_page.dart';
 import 'package:get/get.dart';
 
@@ -51,10 +52,7 @@ class Routes {
         name: BookEditPage.route,
         page: () => BookEditPage(),
       ),
-      GetPage(
-        name: BookDetailPage.route,
-        page: () => BookDetailPage(),
-      ),
+
       GetPage(
         name: BookViewerPage.route,
         page: () => const BookViewerPage(),
@@ -65,6 +63,11 @@ class Routes {
         page: () => SearchingPage(),
         binding: SearchingBookBinding(),
       ),
+      GetPage(
+        name: BookDetailPage.route,
+        page: () => BookDetailPage(),
+        binding: BookDetailBinding(),
+      )
     ];
   }
 }

@@ -92,6 +92,7 @@ class StorePage extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 primary: customcolor1,
                                 // Foreground color
+                                elevation: 0,
                                 onPrimary:
                                     Theme.of(context).colorScheme.onPrimary,
                               ).copyWith(
