@@ -33,7 +33,6 @@ Future<void> main(List<String> args) async {
 
 Future<void> initServices() async {
   Get.lazyPut(() => AuthService());
-  Get.putAsync(() async => await Hive.openBox('app'));
 }
 
 class MyApp extends StatelessWidget {

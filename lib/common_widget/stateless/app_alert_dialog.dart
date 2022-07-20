@@ -16,7 +16,7 @@ class AppAlertDialog {
         title: Text(title),
         content: Text(content ?? ''),
         actions: [
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Get.back();
               onCancel?.call();
@@ -24,7 +24,7 @@ class AppAlertDialog {
             child: Text(textCancel ?? 'Huỷ'),
           ),
           if (textConfirm != null)
-            OutlinedButton(
+            TextButton(
               onPressed: () {
                 Get.back();
                 onConfirm?.call();

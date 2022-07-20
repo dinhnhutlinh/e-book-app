@@ -40,4 +40,6 @@ class FavBookController extends GetxController with StateMixin {
   }
 
   List<Book> get farBooks => _favBooks;
+
+  void showBookMoreBTS({required Book book}) {}
 }
