@@ -2,6 +2,7 @@ import 'package:e_book_app/assets.gen.dart';
 import 'package:e_book_app/common_widget/stateless/book_card.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/searching/controller/searching_controller.dart';
+import 'package:e_book_app/presetations/searching/widgets/categories_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,27 +39,28 @@ class SearchingPage extends GetView<SearchingController> {
           ),
           Expanded(
             child: controller.obx(
-              (state) => Obx(() => controller.book.isEmpty
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Assets.resources.images.search
-                            .image(width: Get.width / 2),
-                        const SizedBox(height: 8),
-                        const Text('Find your book'),
-                      ],
-                    )
-                  : ListView(
-                      children: [
-                        for (Book book in controller.book) BookCard(book: book),
-                      ],
-                    )),
-              // onEmpty: ,
-              onLoading: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
+                (state) => Obx(() => controller.book.isEmpty
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Assets.resources.images.search
+                              .image(width: Get.width / 2),
+                          const SizedBox(height: 8),
+                          const Text('Find your book'),
+                        ],
+                      )
+                    : ListView(
+                        children: [
+                          for (Book book in controller.book)
+                            BookCard(book: book),
+                        ],
+                      )),
+                // onEmpty: ,
+                onLoading: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                onEmpty: CategoriesWidget()),
           ),
         ],
       ),
