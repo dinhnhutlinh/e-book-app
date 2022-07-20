@@ -140,4 +140,9 @@ class BookService extends GetxService {
   void deleteOwnReview({required String bookId, required String userId}) {
     bookRef.doc(bookId).collection('review').doc(userId).delete();
   }
+
+  Future<List<Book>> bookOfCategory({String? categoyId}) async {
+    return (bookRef.where('category.id', isEqualTo: categoyId)).get().then(
+        (value) => value.docs.map((e) => Book.fromJson(e.data())).toList());
+  }
 }

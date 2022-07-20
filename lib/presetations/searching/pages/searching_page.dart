@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 class SearchingPage extends GetView<SearchingController> {
   static const route = '/Searching';
 
-  const SearchingPage({Key? key}) : super(key: key);
+  SearchingPage({Key? key}) : super(key: key);
+  TextEditingController txtController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,13 @@ class SearchingPage extends GetView<SearchingController> {
           Padding(
             padding: const EdgeInsets.all(12),
             child: TextField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  suffixIcon: InkWell(
+                      onTap: () =>
+                          controller.searchWithQuery(txtController.text),
+                      child: const Icon(Icons.search)),
                   hintText: 'Searching book',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(12),
                     ),
@@ -39,23 +44,25 @@ class SearchingPage extends GetView<SearchingController> {
           ),
           Expanded(
             child: controller.obx(
-                (state) => Obx(() => controller.book.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Assets.resources.images.search
-                              .image(width: Get.width / 2),
-                          const SizedBox(height: 8),
-                          const Text('Find your book'),
-                        ],
-                      )
-                    : ListView(
-                        children: [
-                          for (Book book in controller.book)
-                            BookCard(book: book),
-                        ],
-                      )),
+                (state) => Obx(
+                      () => controller.book.isEmpty
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Assets.resources.images.search
+                                    .image(width: Get.width / 2),
+                                const SizedBox(height: 8),
+                                const Text('Find your book'),
+                              ],
+                            )
+                          : ListView(
+                              children: [
+                                for (Book book in controller.book)
+                                  BookCard(book: book),
+                              ],
+                            ),
+                    ),
                 // onEmpty: ,
                 onLoading: const Center(
                   child: CircularProgressIndicator(),
