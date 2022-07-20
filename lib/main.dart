@@ -3,12 +3,16 @@ import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/routers/app_router.dart';
 import 'package:e_book_app/services/auth_service.dart';
+import 'package:e_book_app/services/book_service.dart';
+import 'package:e_book_app/services/category_services.dart';
+import 'package:e_book_app/services/user_services.dart';
 import 'package:e_book_app/utils/color_schemes.g.dart';
 import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firebase_options.dart';
 import 'presetations/app_binding.dart';
@@ -17,24 +21,22 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  await Hive.initFlutter();
+  await initServices();
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
-    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
-    ..loadingStyle = EasyLoadingStyle.dark
-    ..indicatorSize = 45.0
-    ..radius = 10.0
-    ..progressColor = Colors.yellow
-    ..backgroundColor = Colors.green
-    ..indicatorColor = Colors.yellow
-    ..textColor = Colors.yellow
-    ..maskColor = Colors.blue.withOpacity(0.5)
     ..userInteractions = true
     ..maskColor = Colors.black.withOpacity(0.2)
     ..dismissOnTap = false;
 
-  Get.put(AuthService());
   runApp(const MyApp());
+}
+
+Future<void> initServices() async {
+  Get.lazyPut(() => AuthService());
+  Get.lazyPut(() => BookService());
+  Get.lazyPut(() => UserService());
+  Get.lazyPut(() => CategoryService());
 }
 
 class MyApp extends StatelessWidget {
@@ -71,7 +73,7 @@ class MyApp extends StatelessWidget {
           colorScheme: darkScheme,
           extensions: [darkCustomColors],
         ),
-        themeMode: ThemeMode.dark,
+        // themeMode: Get.find<DBService>().getThemeMode,
         builder: EasyLoading.init(),
         getPages: Routes.router(),
         initialBinding: AppBinding(),

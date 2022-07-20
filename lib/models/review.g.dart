@@ -7,9 +7,9 @@ part of 'review.dart';
 // **************************************************************************
 
 Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
-      user: json['user'] == null
-          ? null
-          : UserProfile.fromJson(json['user'] as Map<String, dynamic>),
+      userId: json['userId'] as String?,
+      userName: json['userName'] as String?,
+      userImage: json['userImage'] as String?,
       rate: json['rate'] as int?,
       content: json['content'] as String?,
       update: json['update'] == null
@@ -18,7 +18,9 @@ Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
     );
 
 Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
-      'user': instance.user?.toJson(),
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'userImage': instance.userImage,
       'rate': instance.rate,
       'content': instance.content,
       'update': instance.update?.toIso8601String(),

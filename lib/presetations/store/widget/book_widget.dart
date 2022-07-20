@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/models/book.dart';
-import 'package:e_book_app/presetations/book_detail/presentations/pages/book_detail_page.dart';
-import 'package:e_book_app/themes/app_colors.dart';
+import 'package:e_book_app/presetations/book_detail/pages/book_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -23,8 +22,8 @@ class BookWidget extends StatelessWidget {
             imageUrl: book.linkThumbnail ?? '',
             fit: BoxFit.cover,
             placeholder: (context, url) => Shimmer.fromColors(
-              baseColor: AppColors.white,
-              highlightColor: AppColors.orange.withOpacity(0.2),
+              baseColor: Colors.grey,
+              highlightColor: Colors.grey.withOpacity(0.2),
               child: const SizedBox(
                 height: 192,
                 width: 128,

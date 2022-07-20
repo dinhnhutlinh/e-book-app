@@ -4,12 +4,10 @@ import 'package:e_book_app/presetations/user/pages/user_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<HomeController> {
   static const route = '/Home';
 
   HomePage({Key? key}) : super(key: key);
-
-  final _homeController = Get.find<HomeController>();
 
   final _pages = [
     StorePage(),
@@ -23,13 +21,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Obx(
-        () =>
-            IndexedStack(index: _homeController.currcentPage, children: _pages),
+        () => IndexedStack(index: controller.currcentPage, children: _pages),
       ),
       bottomNavigationBar: Obx(
         () => NavigationBar(
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          onDestinationSelected: _homeController.changePage,
+          onDestinationSelected: controller.changePage,
           destinations: const [
             NavigationDestination(
               icon: Icon(Icons.home),
@@ -44,19 +41,7 @@ class HomePage extends StatelessWidget {
               label: 'Home',
             ),
           ],
-          selectedIndex: _homeController.currcentPage,
-
-          // currentIndex: _homeController.currcentPage,
-          // onTap: _homeController.changePage,
-          // // onTap: (index) => _homeController.signOut(),
-          // backgroundColor: AppColors.blueBackground,
-          // selectedItemColor: AppColors.deepOrange,
-          // showUnselectedLabels: false,
-          // items: const [
-          //   BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          //   BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          //   BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          // ],
+          selectedIndex: controller.currcentPage,
         ),
       ),
     );

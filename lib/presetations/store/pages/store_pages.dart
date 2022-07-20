@@ -1,6 +1,7 @@
 import 'package:e_book_app/models/book.dart';
+import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
 import 'package:e_book_app/presetations/store/controllers/store_controller.dart';
-import 'package:e_book_app/presetations/store/widget/book_card.dart';
+import 'package:e_book_app/common_widget/stateless/book_card.dart';
 import 'package:e_book_app/presetations/store/widget/lastest_book_list.dart';
 import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class StorePage extends StatelessWidget {
         title: const Text('Expolse'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Get.toNamed(SearchingPage.route),
             icon: const Icon(
               Icons.search,
             ),

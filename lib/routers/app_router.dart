@@ -6,7 +6,7 @@ import 'package:e_book_app/presetations/admin/dashboard/controller/dashbroad_bin
 import 'package:e_book_app/presetations/admin/dashboard/pages/dashbroad_page.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/book_detail/bindings/book_detail_binding.dart';
-import 'package:e_book_app/presetations/book_detail/presentations/pages/book_detail_page.dart';
+import 'package:e_book_app/presetations/book_detail/pages/book_detail_page.dart';
 import 'package:e_book_app/presetations/home/controllers/home_binding.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/presetations/reading/binding/book_viewer_binding.dart';

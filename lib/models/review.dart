@@ -1,20 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:e_book_app/models/user_profile.dart';
-
 part 'review.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Review {
-  @JsonKey(name: 'user')
-  UserProfile? user;
+  String? userId;
+  String? userName;
+  String? userImage;
   int? rate;
   String? content;
   DateTime? update;
-
   Review({
-    this.user,
+    this.userId,
+    this.userName,
+    this.userImage,
     this.rate,
     this.content,
     this.update,

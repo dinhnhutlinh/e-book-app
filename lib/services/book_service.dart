@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_book_app/configs/defind.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/models/review.dart';
+import 'package:e_book_app/services/user_services.dart';
 import 'package:get/get.dart';
 
 class BookService extends GetxService {
   final bookRef = FirebaseFirestore.instance.collection(Define.book);
+  final reviewRef = FirebaseFirestore.instance.collection(Define.review);
 
   Future<List<Book>> getAllBook() async =>
       (await bookRef.get()).docs.map((e) => Book.fromJson(e.data())).toList();
@@ -71,7 +73,7 @@ class BookService extends GetxService {
   Future<List<Book>> searchWithQuery({required String query}) async {
     return await bookRef
         .where(
-          ['name', 'content'],
+          'name',
           isGreaterThanOrEqualTo: query,
         )
         .get()
@@ -94,38 +96,48 @@ class BookService extends GetxService {
             snapshot.docs.map((e) => Book.fromJson(e.data())).toList());
   }
 
-  Future<List<Review>> getAllReview(String bookId) async {
-    return await bookRef
-        .doc('bookId')
-        .collection('reviews')
-        .orderBy('update')
-        .get()
-        .then((value) =>
-            value.docs.map((e) => Review.fromJson(e.data())).toList());
+  Future<List<Review>> getAllReview({required String bookId}) async {
+    final collection = bookRef.doc(bookId).collection('review');
+    final data = await collection
+        .where('userId',
+            isNotEqualTo: Get.find<UserService>().profile?.id ?? '')
+        // .orderBy('update', descending: true)
+        .get();
+
+    if (data.docs.isNotEmpty) {
+      return data.docs.map((e) => Review.fromJson(e.data())).toList();
+    }
+    return [];
   }
 
-  Future<Review?> getOwnReview(String uid) async {
-    return await bookRef
-        .doc('bookId')
-        .collection('reviews')
-        .where('user.uid', isEqualTo: uid)
+  Future<Review?> getOwnReview(
+      {required String bookId, required String uid}) async {
+    return bookRef
+        .doc(bookId)
+        .collection('review')
+        .where('userId', isEqualTo: uid)
         .get()
         .then((value) {
       if (value.docs.isEmpty) {
         return null;
+      } else {
+        return Review.fromJson(value.docs.first.data());
       }
-      return Review.fromJson(value.docs.first.data());
     });
   }
 
   Future<void> addReview(
-      {required Book book,
+      {required String bookId,
       required Review review,
       required String userId}) async {
     await bookRef
-        .doc(book.id)
+        .doc(bookId)
         .collection('review')
         .doc(userId)
         .set(review.toJson());
+  }
+
+  void deleteOwnReview({required String bookId, required String userId}) {
+    bookRef.doc(bookId).collection('review').doc(userId).delete();
   }
 }

@@ -80,10 +80,6 @@ class $ResourcesImagesGen {
   AssetGenImage get ellipse5 =>
       const AssetGenImage('resources/images/Ellipse 5.png');
 
-  /// File path: resources/images/Search.png
-  AssetGenImage get search =>
-      const AssetGenImage('resources/images/Search.png');
-
   /// File path: resources/images/logoBlue.png
   AssetGenImage get logoBlue =>
       const AssetGenImage('resources/images/logoBlue.png');
@@ -95,6 +91,10 @@ class $ResourcesImagesGen {
   /// File path: resources/images/logoWhite.png
   AssetGenImage get logoWhite =>
       const AssetGenImage('resources/images/logoWhite.png');
+
+  /// File path: resources/images/search.png
+  AssetGenImage get search =>
+      const AssetGenImage('resources/images/search.png');
 }
 
 class Assets {
