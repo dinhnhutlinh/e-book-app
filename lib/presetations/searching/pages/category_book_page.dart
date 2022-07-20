@@ -21,9 +21,11 @@ class CategoryBookPage extends GetView<CategoryBookController> {
           () => CustomScrollView(
             slivers: [
               SliverAppBar(
+                floating: true,
+                pinned: true,
                 title: Text(controller.categoy.name ?? ''),
                 bottom: PreferredSize(
-                  preferredSize: const Size(50, 50),
+                  preferredSize: const Size(50, 72),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Align(

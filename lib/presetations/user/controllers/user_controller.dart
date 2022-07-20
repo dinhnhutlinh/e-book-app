@@ -25,6 +25,6 @@ class UserController extends GetxController {
   }
 
   UserProfile? get profile => _profile;
-
+  String get uid => _auhtService.user?.uid ?? '';
   bool get isLoading => _isLoading.value;
 }

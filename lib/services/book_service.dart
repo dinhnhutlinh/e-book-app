@@ -145,4 +145,11 @@ class BookService extends GetxService {
     return (bookRef.where('category.id', isEqualTo: categoyId)).get().then(
         (value) => value.docs.map((e) => Book.fromJson(e.data())).toList());
   }
+
+  Future<List<Book>> favoriteBook({required String uid}) async {
+    return (await bookRef.where('likes', arrayContains: uid).get())
+        .docs
+        .map((e) => Book.fromJson(e.data()))
+        .toList();
+  }
 }

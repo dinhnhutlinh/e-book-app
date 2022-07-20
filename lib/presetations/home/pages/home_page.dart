@@ -1,4 +1,5 @@
 import 'package:e_book_app/presetations/home/controllers/home_controller.dart';
+import 'package:e_book_app/presetations/library/pages/lib_page.dart';
 import 'package:e_book_app/presetations/store/pages/store_pages.dart';
 import 'package:e_book_app/presetations/user/pages/user_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class HomePage extends GetView<HomeController> {
 
   final _pages = [
     StorePage(),
-    StorePage(),
+    LibPage(),
     // StorePage(),
     UserDetailPage()
   ];

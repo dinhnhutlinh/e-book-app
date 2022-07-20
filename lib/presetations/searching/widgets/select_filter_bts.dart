@@ -1,6 +1,6 @@
 import 'package:e_book_app/presetations/searching/controller/category_book_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class SelectFilterBTS extends GetView<CategoryBookController> {
   @override
@@ -29,21 +29,30 @@ class SelectFilterBTS extends GetView<CategoryBookController> {
               'Default',
               style: textTheme.titleSmall,
             ),
-            onTap: controller.sortById,
+            onTap: () {
+              controller.sortById();
+              Get.back();
+            },
           ),
           ListTile(
             title: Text(
               'Name',
               style: textTheme.titleSmall,
             ),
-            onTap: controller.sortByName,
+            onTap: () {
+              controller.sortByName();
+              Get.back();
+            },
           ),
           ListTile(
             title: Text(
               'Date',
               style: textTheme.titleSmall,
             ),
-            onTap: controller.sortByDate,
+            onTap: () {
+              controller.sortByDate();
+              Get.back();
+            },
           ),
         ],
       ),

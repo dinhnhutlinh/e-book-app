@@ -4,14 +4,14 @@ import 'package:e_book_app/models/user_profile.dart';
 import 'package:e_book_app/presetations/book_detail/widget/about_this_book.dart';
 import 'package:e_book_app/presetations/book_detail/widget/review_dialog.dart';
 import 'package:e_book_app/presetations/book_detail/widget/reviews_dialog.dart';
+import 'package:e_book_app/presetations/library/controller/fav_controller.dart';
 import 'package:e_book_app/presetations/user/controllers/user_controller.dart';
-import 'package:e_book_app/services/auth_service.dart';
 import 'package:e_book_app/services/book_service.dart';
 import 'package:get/get.dart';
 
 class BookDetailController extends GetxController {
   final _bookServices = Get.find<BookService>();
-  final _authServices = Get.find<AuthService>();
+  final _favBookController = Get.find<FavBookController>();
 
   Book book = Get.arguments;
   RxBool wasLoad = false.obs;
@@ -20,22 +20,19 @@ class BookDetailController extends GetxController {
   final Rxn<Review> _ownReview = Rxn<Review>();
   @override
   Future<void> onInit() async {
-    _wasLike.value = await _bookServices.wasLike(
-        bookId: book.id ?? '', userId: _authServices.user?.uid ?? '');
+    _wasLike.value = _favBookController.checkFavBook(book.id ?? '');
     _loadingReview();
     _loadOwnReview();
     super.onInit();
   }
 
   Future<void> likeBook() async {
-    _bookServices.likeBook(
-        bookId: book.id ?? '', userId: _authServices.user?.uid ?? '');
+    _favBookController.addFavBook(book: book);
     _wasLike.value = true;
   }
 
   Future<void> unLikeBook() async {
-    _bookServices.unlikeBook(
-        bookId: book.id ?? '', userId: _authServices.user?.uid ?? '');
+    _favBookController.removeFavBook(book: book);
     _wasLike.value = false;
   }
 
@@ -58,21 +55,21 @@ class BookDetailController extends GetxController {
   }
 
   Future<void> _loadOwnReview() async {
-    UserProfile user = Get.find<UserController>().profile!;
     _bookServices
-        .getOwnReview(uid: user.id ?? '', bookId: book.id ?? '')
+        .getOwnReview(
+            uid: Get.find<UserController>().uid, bookId: book.id ?? '')
         .then((value) => _ownReview.value = value);
   }
 
   void deleteOwnReview() {
     _ownReview.value = null;
     _bookServices.deleteOwnReview(
-        bookId: book.id ?? '',
-        userId: Get.find<UserController>().profile?.id ?? '');
+        bookId: book.id ?? '', userId: Get.find<UserController>().uid);
   }
 
   Future<void> addReview({required Review review}) async {
     UserProfile user = Get.find<UserController>().profile!;
+
     review.userId = user.id;
     review.userImage = user.avatar;
     review.userName = user.name;

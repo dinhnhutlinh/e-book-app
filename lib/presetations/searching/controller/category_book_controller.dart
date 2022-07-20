@@ -15,7 +15,6 @@ class CategoryBookController extends GetxController with StateMixin {
     change(null, status: RxStatus.loading());
     _bookService.bookOfCategory(categoyId: categoy.id).then((value) {
       book.addAll(value);
-      print(value);
       sortById();
       change(null, status: RxStatus.success());
     });
@@ -29,18 +28,15 @@ class CategoryBookController extends GetxController with StateMixin {
   void sortByDate() {
     sortBy.value = 'Date';
     book.sort((a, b) => a.updateAt!.compareTo(b.updateAt!));
-    Get.back();
   }
 
   void sortById() {
     sortBy.value = 'Default';
     book.sort((a, b) => a.id!.compareTo(b.id!));
-    Get.back();
   }
 
   void sortByName() {
     sortBy.value = 'Name';
     book.sort((a, b) => a.name!.compareTo(b.name!));
-    Get.back();
   }
 }

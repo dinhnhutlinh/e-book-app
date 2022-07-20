@@ -3,9 +3,6 @@ import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/routers/app_router.dart';
 import 'package:e_book_app/services/auth_service.dart';
-import 'package:e_book_app/services/book_service.dart';
-import 'package:e_book_app/services/category_services.dart';
-import 'package:e_book_app/services/user_services.dart';
 import 'package:e_book_app/utils/color_schemes.g.dart';
 import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,14 +26,14 @@ Future<void> main(List<String> args) async {
     ..maskColor = Colors.black.withOpacity(0.2)
     ..dismissOnTap = false;
 
+  final box = await Hive.openBox('app');
+
   runApp(const MyApp());
 }
 
 Future<void> initServices() async {
   Get.lazyPut(() => AuthService());
-  Get.lazyPut(() => BookService());
-  Get.lazyPut(() => UserService());
-  Get.lazyPut(() => CategoryService());
+  Get.putAsync(() async => await Hive.openBox('app'));
 }
 
 class MyApp extends StatelessWidget {
@@ -73,7 +70,8 @@ class MyApp extends StatelessWidget {
           colorScheme: darkScheme,
           extensions: [darkCustomColors],
         ),
-        // themeMode: Get.find<DBService>().getThemeMode,
+        themeMode:
+            Get.find<Box>().get('themeMode', defaultValue: ThemeMode.system),
         builder: EasyLoading.init(),
         getPages: Routes.router(),
         initialBinding: AppBinding(),
