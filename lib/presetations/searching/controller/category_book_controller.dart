@@ -22,7 +22,7 @@ class CategoryBookController extends GetxController with StateMixin {
   }
 
   void selectFilter() {
-    Get.bottomSheet(SelectFilterBTS());
+    Get.bottomSheet(const SelectFilterBTS());
   }
 
   void sortByDate() {

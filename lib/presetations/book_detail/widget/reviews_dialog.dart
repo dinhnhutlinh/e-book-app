@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class ReviewsDialog extends GetView<BookDetailController> {
+  const ReviewsDialog({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

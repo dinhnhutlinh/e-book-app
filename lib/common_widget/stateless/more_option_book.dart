@@ -11,7 +11,7 @@ import 'package:e_book_app/presetations/library/controller/fav_controller.dart';
 class MoreOptionBook extends StatelessWidget {
   final _favController = Get.find<FavBookController>();
   final _downloadController = Get.find<DownloadController>();
-  Book book;
+  final Book book;
   MoreOptionBook({
     Key? key,
     required this.book,
@@ -20,7 +20,6 @@ class MoreOptionBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.background,

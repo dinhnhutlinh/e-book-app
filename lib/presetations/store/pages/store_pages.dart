@@ -1,6 +1,6 @@
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/admin/categorys/controller/categories_controller.dart';
-import 'package:e_book_app/presetations/library/widget/book_tile.dart';
+import 'package:e_book_app/common_widget/stateless/book_tile.dart';
 import 'package:e_book_app/presetations/searching/pages/category_book_page.dart';
 import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
 import 'package:e_book_app/presetations/store/controllers/store_controller.dart';
@@ -9,10 +9,8 @@ import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StorePage extends StatelessWidget {
-  StorePage({Key? key}) : super(key: key);
-
-  final _storeController = Get.put(StoreController());
+class StorePage extends GetView<StoreController> {
+  const StorePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class StorePage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: _storeController.obx(
+            child: controller.obx(
               onLoading: const Center(
                 child: CircularProgressIndicator(),
               ),
@@ -45,8 +43,7 @@ class StorePage extends StatelessWidget {
                       height: 8,
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(),
-                      onPressed: _storeController.onInit,
+                      onPressed: controller.onInit,
                       child: const Text('Retry'),
                     )
                   ],
@@ -115,9 +112,8 @@ class StorePage extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    for (Book book in _storeController.books)
-                      BookTile(book: book),
-                    if (_storeController.isLoadMore)
+                    for (Book book in controller.books) BookTile(book: book),
+                    if (controller.isLoadMore)
                       const Center(child: CircularProgressIndicator()),
                   ],
                 ),

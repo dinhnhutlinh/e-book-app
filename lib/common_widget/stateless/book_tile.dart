@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_book_app/presetations/library/widget/more_option_book.dart';
+import 'package:e_book_app/common_widget/stateless/more_option_book.dart';
 import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +8,8 @@ import 'package:e_book_app/models/book.dart';
 import 'package:get/get.dart';
 
 class BookTile extends StatelessWidget {
-  Book book;
-  BookTile({
+  final Book book;
+  const BookTile({
     Key? key,
     required this.book,
   }) : super(key: key);

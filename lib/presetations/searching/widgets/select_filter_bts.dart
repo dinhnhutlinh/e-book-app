@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SelectFilterBTS extends GetView<CategoryBookController> {
+  const SelectFilterBTS({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;

@@ -1,4 +1,4 @@
-import 'package:e_book_app/common_widget/stateless/book_card.dart';
+import 'package:e_book_app/common_widget/stateless/book_tile.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/searching/controller/category_book_controller.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class CategoryBookPage extends GetView<CategoryBookController> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    for (Book book in controller.book) BookCard(book: book),
+                    for (Book book in controller.book) BookTile(book: book),
                   ],
                 ),
               ),

@@ -1,10 +1,8 @@
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/services/book_service.dart';
-import 'package:e_book_app/services/category_services.dart';
 import 'package:get/get.dart';
 
 class StoreController extends GetxController with StateMixin {
-  final _categoryService = Get.find<CategoryService>();
   final _bookService = Get.find<BookService>();
   final RxList<Book> _books = <Book>[].obs;
 
@@ -14,6 +12,7 @@ class StoreController extends GetxController with StateMixin {
   @override
   Future<void> onInit() async {
     await fetchBook();
+    change(null, status: RxStatus.success());
     super.onInit();
   }
 

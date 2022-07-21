@@ -57,7 +57,7 @@ class BookDetailController extends GetxController {
   }
 
   void showReviews() {
-    Get.dialog(ReviewsDialog(), useSafeArea: true);
+    Get.dialog(const ReviewsDialog(), useSafeArea: true);
   }
 
   Future<void> _loadingReview() async {

@@ -14,9 +14,8 @@ class BookViewerController extends GetxController with StateMixin {
   final _progressController = Get.find<ProgressController>();
   final Book book = Get.arguments;
   late Uint8List _pdfData;
-  late int _bookLength;
+
   late String _pathFile;
-  final Rx<int> _currentPage = 1.obs;
 
   PdfViewerController pdfController = PdfViewerController();
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:e_book_app/presetations/library/widget/custom_alert.dart';
+import 'package:e_book_app/common_widget/stateful/custom_alert.dart';
 import 'package:flutter/material.dart';
 
 class DownloadAlert extends StatefulWidget {
@@ -10,7 +10,7 @@ class DownloadAlert extends StatefulWidget {
       : super(key: key);
 
   @override
-  _DownloadAlertState createState() => _DownloadAlertState();
+  State<DownloadAlert> createState() => _DownloadAlertState();
 }
 
 class _DownloadAlertState extends State<DownloadAlert> {
@@ -20,8 +20,6 @@ class _DownloadAlertState extends State<DownloadAlert> {
   int total = 0;
 
   download() async {
-    print(widget.url);
-    print(widget.path);
     await dio.download(
       widget.url,
       widget.path,

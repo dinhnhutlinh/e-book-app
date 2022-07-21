@@ -5,8 +5,8 @@ import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
 
 class ReviewListTile extends StatelessWidget {
-  Review review;
-  ReviewListTile({
+  final Review review;
+  const ReviewListTile({
     Key? key,
     required this.review,
   }) : super(key: key);

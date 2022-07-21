@@ -8,15 +8,14 @@ import 'package:get/get.dart';
 class CategoriesWidget extends GetView<SearchingController> {
   final colors = [Colors.red, Colors.green, Colors.orange];
 
+  CategoriesWidget({Key? key}) : super(key: key);
+
   Color ramdonColor(int index, ColorScheme colorScheme) {
     return colors[index % colors.length].harmonizeWith(colorScheme.primary);
   }
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final customColor = Theme.of(context).extension<CustomColors>();
     return Obx(
       () => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:e_book_app/common_widget/stateful/download_alert.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/models/download_model.dart';
-import 'package:e_book_app/presetations/library/widget/download_alert.dart';
 import 'package:e_book_app/services/book_service.dart';
-import 'package:get/get.dart' hide Response;
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';

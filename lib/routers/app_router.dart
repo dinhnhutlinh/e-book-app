@@ -67,7 +67,7 @@ class Routes {
       ),
       GetPage(
         name: CategoryBookPage.route,
-        page: () => CategoryBookPage(),
+        page: () => const CategoryBookPage(),
         binding: CategoryBookBinding(),
       ),
       GetPage(

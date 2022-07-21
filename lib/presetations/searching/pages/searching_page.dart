@@ -1,5 +1,5 @@
 import 'package:e_book_app/assets.gen.dart';
-import 'package:e_book_app/common_widget/stateless/book_card.dart';
+import 'package:e_book_app/common_widget/stateless/book_tile.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/searching/controller/searching_controller.dart';
 import 'package:e_book_app/presetations/searching/widgets/categories_widget.dart';
@@ -10,12 +10,10 @@ class SearchingPage extends GetView<SearchingController> {
   static const route = '/Searching';
 
   SearchingPage({Key? key}) : super(key: key);
-  TextEditingController txtController = TextEditingController();
+  final txtController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(title: const Text('Search')),
       body: Column(
@@ -59,7 +57,7 @@ class SearchingPage extends GetView<SearchingController> {
                           : ListView(
                               children: [
                                 for (Book book in controller.book)
-                                  BookCard(book: book),
+                                  BookTile(book: book),
                               ],
                             ),
                     ),

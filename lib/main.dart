@@ -25,9 +25,7 @@ Future<void> main(List<String> args) async {
     ..userInteractions = true
     ..maskColor = Colors.black.withOpacity(0.2)
     ..dismissOnTap = false;
-
-  final box = await Hive.openBox('app');
-
+  await Hive.openBox('App');
   runApp(const MyApp());
 }
 

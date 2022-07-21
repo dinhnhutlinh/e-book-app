@@ -11,8 +11,8 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   final _pages = [
-    StorePage(),
-    LibPage(),
+    const StorePage(),
+    const LibPage(),
     // StorePage(),
     UserDetailPage()
   ];
@@ -35,11 +35,11 @@ class HomePage extends GetView<HomeController> {
             ),
             NavigationDestination(
               icon: Icon(Icons.library_books),
-              label: 'Home',
+              label: 'Library',
             ),
             NavigationDestination(
               icon: Icon(Icons.settings),
-              label: 'Home',
+              label: 'User',
             ),
           ],
           selectedIndex: controller.currcentPage,
