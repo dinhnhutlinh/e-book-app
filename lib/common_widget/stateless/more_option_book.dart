@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/presetations/book_detail/pages/book_detail_page.dart';
 import 'package:e_book_app/presetations/library/controller/download_controller.dart';
+import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,6 +59,22 @@ class MoreOptionBook extends StatelessWidget {
           const Divider(
             height: 0.1,
           ),
+          if (_downloadController.checkDownload(bookId: book.id ?? ''))
+            Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.book_outlined),
+                  title: const Text('Read book'),
+                  onTap: () {
+                    Get.back();
+                    Get.toNamed(BookViewerPage.route, arguments: book);
+                  },
+                ),
+                const Divider(
+                  height: 0.1,
+                ),
+              ],
+            ),
           _favController.checkFavBook(book.id ?? '')
               ? ListTile(
                   leading: const Icon(Icons.favorite_border_outlined),

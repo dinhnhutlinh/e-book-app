@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/common_widget/stateless/more_option_book.dart';
-import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
+import 'package:e_book_app/presetations/book_detail/pages/book_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_book_app/models/book.dart';
@@ -33,7 +33,7 @@ class BookTile extends StatelessWidget {
         onPressed: () => showMoreSelect(book: book),
       ),
       onLongPress: () => showMoreSelect(book: book),
-      onTap: () => Get.toNamed(BookViewerPage.route, arguments: book),
+      onTap: () => Get.toNamed(BookDetailPage.route, arguments: book),
     );
   }
 

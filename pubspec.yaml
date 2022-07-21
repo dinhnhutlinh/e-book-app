@@ -48,6 +48,7 @@ dependencies:
   hive_flutter: ^1.1.0
   permission_handler: ^8.1.6
   syncfusion_flutter_pdfviewer: ^20.2.39-beta
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:

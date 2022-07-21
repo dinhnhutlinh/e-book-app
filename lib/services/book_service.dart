@@ -159,4 +159,11 @@ class BookService extends GetxService {
         .map((e) => Book.fromJson(e.data()))
         .toList();
   }
+
+  Future<List<Book>> getTrendBook() async {
+    return (await bookRef.limit(10).get())
+        .docs
+        .map((e) => Book.fromJson(e.data()))
+        .toList();
+  }
 }
