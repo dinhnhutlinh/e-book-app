@@ -10,7 +10,6 @@ class AppBinding extends Bindings {
     Get.lazyPut(() => BookService());
     Get.lazyPut(() => UserService());
     Get.lazyPut(() => CategoryService());
-    // Get.create(() => ListBookController());
     Get.put(UserController());
   }
 }

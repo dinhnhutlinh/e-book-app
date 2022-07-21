@@ -1,3 +1,4 @@
+import 'package:e_book_app/presetations/library/pages/download_book_list.dart';
 import 'package:e_book_app/presetations/library/pages/fav_book_list.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class LibPage extends StatelessWidget {
               child: TabBarView(
                 children: [
                   FavoriteBookList(),
-                  Text('1'),
+                  DownloadBooKList(),
                 ],
               ),
             ),

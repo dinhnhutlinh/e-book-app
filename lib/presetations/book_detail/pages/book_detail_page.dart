@@ -16,7 +16,6 @@ class BookDetailPage extends GetView<BookDetailController> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -91,40 +90,54 @@ class BookDetailPage extends GetView<BookDetailController> {
           const SizedBox(
             height: 12,
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(),
-                    onPressed: () {
-                      Get.toNamed(
-                        BookViewerPage.route,
-                        arguments: controller.book,
-                      );
-                    },
-                    child: const Text('Read sample'),
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      // Foreground color
-                      onPrimary: Theme.of(context).colorScheme.primaryContainer,
-                      // Background color
-                      primary: Theme.of(context).colorScheme.primary,
-                    ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-                    onPressed: () {},
-                    child: Text('Buy \$${controller.book.price ?? 0}'),
-                  ),
-                )
-              ],
+          Obx(
+            () => Padding(
+              padding: const EdgeInsets.only(right: 16, left: 16),
+              child: controller.wasDownload
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Get.toNamed(
+                                BookViewerPage.route,
+                                arguments: controller.book,
+                              );
+                            },
+                            child: const Text('Read'),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              onPrimary: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                              primary: Theme.of(context).colorScheme.primary,
+                            ).copyWith(
+                                elevation: ButtonStyleButton.allOrNull(0.0)),
+                            onPressed: controller.deleteDownload,
+                            child: const Text('Remove'),
+                          ),
+                        ),
+                      ],
+                    )
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        // Foreground color
+                        onPrimary:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        // Background color
+                        primary: Theme.of(context).colorScheme.primary,
+                      ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+                      onPressed: controller.downloadBook,
+                      child: const Text('Download'),
+                    ),
             ),
           ),
           const SizedBox(

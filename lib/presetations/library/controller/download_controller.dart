@@ -1,63 +1,89 @@
+import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/models/download_model.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:e_book_app/presetations/library/widget/download_alert.dart';
+import 'package:e_book_app/services/book_service.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class DownloadController extends GetxController {
-  List<DownloadModel> downloads = [];
+class DownloadController extends GetxController with StateMixin {
+  final _bookService = Get.find<BookService>();
+
+  List<DownloadModel> _downloads = [];
+  final RxList<Book> _downloadedBook = <Book>[].obs;
 
   @override
   Future<void> onInit() async {
-    _getDownload();
+    await _getDownload();
+    await _getBookDownloads();
+    change(null, status: RxStatus.success());
     super.onInit();
   }
 
+  _checkPermision() async {
+    PermissionStatus permission = await Permission.storage.status;
+
+    if (permission != PermissionStatus.granted) {
+      await Permission.storage.request();
+      // access media location needed for android 10/Q
+      await Permission.accessMediaLocation.request();
+      // manage external storage needed for android 11/R
+      await Permission.manageExternalStorage.request();
+    }
+  }
+
   _getDownload() async {
-    Box db = await Hive.openBox('app');
-    downloads.clear();
-    downloads.addAll(db.get('Download', defaultValue: []));
+    Box db = await Hive.openBox('App');
+    _downloads.clear();
+    List<String> data = db.get('Download', defaultValue: []);
+
+    _downloads =
+        data.map((e) => DownloadModel.fromJson(jsonDecode(e))).toList();
   }
 
   addDownload(Book book) async {
+    _checkPermision();
     Directory dir = await getApplicationDocumentsDirectory();
     String path = dir.path;
 
     String pathFile = '$path/${book.id}.pdf';
-    download2(Dio(), book.url ?? '', pathFile);
-    downloads.add(DownloadModel(bookId: book.id ?? '', location: pathFile));
+    Get.dialog(DownloadAlert(url: book.linkfileOnl ?? '', path: pathFile));
+    _downloads.add(DownloadModel(bookId: book.id ?? '', location: pathFile));
     Box db = await Hive.openBox('app');
-    db.put('Download', downloads);
+    db.put('Download', _downloads.map((e) => jsonEncode(e)).toList());
+    _downloadedBook.add(book);
   }
 
-  removeDownload(Book book) {}
-  Future download2(Dio dio, String url, String savePath) async {
-    try {
-      Response response = await dio.get(url,
-          onReceiveProgress: showDownloadProgress,
-          //Received data with List<int>
-          options: Options(
-            responseType: ResponseType.bytes,
-            followRedirects: false,
-          ));
-      EasyLoading.dismiss();
-      File file = File(savePath);
-      var raf = file.openSync(mode: FileMode.write);
-      // response.data is List<int> type
-      raf.writeFromSync(response.data);
-      await raf.close();
-    } catch (e) {
-      print(e);
-    }
+  removeDownload(Book book) async {
+    DownloadModel downloadModel =
+        _downloads.firstWhere((element) => element.bookId == book.id);
+    File file = File(downloadModel.location);
+    file.delete();
+    Box db = await Hive.openBox('app');
+    _downloads.removeWhere((element) => element.bookId == book.id);
+    db.put('Download', _downloads.map((e) => jsonEncode(e)).toList());
+    _downloadedBook.removeWhere((element) => element.id == book.id);
   }
 
-  void showDownloadProgress(received, total) {
-    if (total != -1) {
-      EasyLoading.showProgress((received / total * 100));
-    }
+  bool checkDownload({required String bookId}) {
+    return _downloads.any((element) => element.bookId == bookId);
+  }
+
+  _getBookDownloads() async {
+    final books = await _bookService.getBookWithIdInList(
+        ids: _downloads.map((e) => e.bookId).toList());
+    _downloadedBook.addAll(books);
+  }
+
+  List<Book> get books => _downloadedBook;
+
+  String getPathLocalOfBook({required String bookId}) {
+    return _downloads
+        .firstWhere((element) => element.bookId == bookId)
+        .location;
   }
 }

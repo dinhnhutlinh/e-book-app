@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:e_book_app/presetations/reading/controller/book_viewer_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class BookViewerPage extends GetView<BookViewerController> {
   static const route = '/BookViewer';
@@ -13,21 +15,14 @@ class BookViewerPage extends GetView<BookViewerController> {
     return Scaffold(
       body: controller.obx(
         (state) => SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: PDFView(
-                  pdfData: controller.data,
-                  swipeHorizontal: false,
-                  pageFling: true,
-                  pageSnap: true,
-                  // nightMode: true,
-                  onViewCreated: (viewController) {
-                    // controller.viewController = viewController;
-                  },
-                ),
-              ),
-            ],
+          child: SfPdfViewer.file(
+            File(controller.pathFile),
+            controller: controller.pdfController,
+            pageLayoutMode: PdfPageLayoutMode.single,
+            // canShowPaginationDialog: true,
+            interactionMode: PdfInteractionMode.selection,
+            onPageChanged: (details) =>
+                controller.saveProgress(details.newPageNumber),
           ),
         ),
         onLoading: const Center(

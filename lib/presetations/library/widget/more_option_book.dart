@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/presetations/book_detail/pages/book_detail_page.dart';
+import 'package:e_book_app/presetations/library/controller/download_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,7 @@ import 'package:e_book_app/presetations/library/controller/fav_controller.dart';
 
 class MoreOptionBook extends StatelessWidget {
   final _favController = Get.find<FavBookController>();
+  final _downloadController = Get.find<DownloadController>();
   Book book;
   MoreOptionBook({
     Key? key,
@@ -72,6 +74,26 @@ class MoreOptionBook extends StatelessWidget {
                   onTap: () {
                     Get.back();
                     _favController.addFavBook(book: book);
+                  },
+                ),
+          const Divider(
+            height: 0.1,
+          ),
+          _downloadController.checkDownload(bookId: book.id ?? '')
+              ? ListTile(
+                  leading: const Icon(Icons.download_done),
+                  title: const Text('Remove download'),
+                  onTap: () {
+                    Get.back();
+                    _downloadController.removeDownload(book);
+                  },
+                )
+              : ListTile(
+                  leading: const Icon(Icons.download),
+                  title: const Text('Download'),
+                  onTap: () {
+                    Get.back();
+                    _downloadController.addDownload(book);
                   },
                 ),
           const Divider(

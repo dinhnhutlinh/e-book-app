@@ -1,7 +1,9 @@
 import 'package:e_book_app/models/book.dart';
+import 'package:e_book_app/presetations/admin/categorys/controller/categories_controller.dart';
+import 'package:e_book_app/presetations/library/widget/book_tile.dart';
+import 'package:e_book_app/presetations/searching/pages/category_book_page.dart';
 import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
 import 'package:e_book_app/presetations/store/controllers/store_controller.dart';
-import 'package:e_book_app/common_widget/stateless/book_card.dart';
 import 'package:e_book_app/presetations/store/widget/lastest_book_list.dart';
 import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class StorePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('Expolse'),
+        title: const Text('Explore'),
         actions: [
           IconButton(
             onPressed: () => Get.toNamed(SearchingPage.route),
@@ -51,42 +53,43 @@ class StorePage extends StatelessWidget {
                 ),
               ),
               (state) => SingleChildScrollView(
-                child: Obx(
-                  () => Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            'News books',
-                            style: textTheme.titleLarge,
-                          ),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          'News books',
+                          style: textTheme.titleLarge,
                         ),
                       ),
-                      LastestBookList(),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12, bottom: 12),
-                          child: Text(
-                            'Category',
-                            style: textTheme.titleMedium,
-                          ),
+                    ),
+                    LastestBookList(),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12, bottom: 12),
+                        child: Text(
+                          'Category',
+                          style: textTheme.titleMedium,
                         ),
                       ),
-                      SizedBox(
-                        height: 42,
-                        child: ListView.builder(
+                    ),
+                    SizedBox(
+                      height: 42,
+                      child: GetBuilder<CategoriesController>(
+                        init: Get.find<CategoriesController>(),
+                        builder: (controller) => ListView.builder(
                           padding: const EdgeInsets.only(
                             left: 12,
                           ),
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: _storeController.categories.length,
+                          itemCount: controller.categories.length,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: ElevatedButton(
@@ -98,23 +101,25 @@ class StorePage extends StatelessWidget {
                                     Theme.of(context).colorScheme.onPrimary,
                               ).copyWith(
                                   elevation: ButtonStyleButton.allOrNull(0.0)),
-                              onPressed: () {},
+                              onPressed: () => Get.toNamed(
+                                  CategoryBookPage.route,
+                                  arguments: controller.categories[index]),
                               child: Text(
-                                _storeController.categories[index].name ?? '',
+                                controller.categories[index].name ?? '',
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      for (Book book in _storeController.books)
-                        BookCard(book: book),
-                      if (_storeController.isLoadMore)
-                        const Center(child: CircularProgressIndicator()),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    for (Book book in _storeController.books)
+                      BookTile(book: book),
+                    if (_storeController.isLoadMore)
+                      const Center(child: CircularProgressIndicator()),
+                  ],
                 ),
               ),
             ),

@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
           extensions: [darkCustomColors],
         ),
         themeMode:
-            Get.find<Box>().get('themeMode', defaultValue: ThemeMode.system),
+            Hive.box('App').get('themeMode', defaultValue: ThemeMode.system),
         builder: EasyLoading.init(),
         getPages: Routes.router(),
         initialBinding: AppBinding(),

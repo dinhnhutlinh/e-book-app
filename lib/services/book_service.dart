@@ -152,4 +152,11 @@ class BookService extends GetxService {
         .map((e) => Book.fromJson(e.data()))
         .toList();
   }
+
+  Future<List<Book>> getBookWithIdInList({required List<String> ids}) async {
+    return (await bookRef.where('id', whereIn: ids).get())
+        .docs
+        .map((e) => Book.fromJson(e.data()))
+        .toList();
+  }
 }
