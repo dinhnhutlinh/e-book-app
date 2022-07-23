@@ -2,7 +2,7 @@ import 'package:e_book_app/common_widget/stateless/book_tile.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/presetations/searching/controller/category_book_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class CategoryBookPage extends GetView<CategoryBookController> {
   static const route = '/CategoryBook';
@@ -33,7 +33,7 @@ class CategoryBookPage extends GetView<CategoryBookController> {
                       child: TextButton(
                         onPressed: controller.selectFilter,
                         child: Text(
-                          'Sort by ${controller.sortBy}',
+                          '${'Sort by'.tr}: ${controller.sortBy.value.tr}',
                           style: textTheme.button?.copyWith(
                               fontSize: 18, color: colorScheme.primary),
                         ),

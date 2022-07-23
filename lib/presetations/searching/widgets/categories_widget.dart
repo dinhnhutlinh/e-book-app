@@ -1,7 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:e_book_app/presetations/searching/controller/searching_controller.dart';
 import 'package:e_book_app/presetations/searching/pages/category_book_page.dart';
-import 'package:e_book_app/utils/custom_color.g.dart';
+import 'package:e_book_app/themes/custom_color.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

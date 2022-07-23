@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 
 class CategoryBookController extends GetxController with StateMixin {
   final _bookService = Get.find<BookService>();
-  Category categoy = Get.arguments;
-  RxList<Book> book = <Book>[].obs;
-  RxString sortBy = 'Default'.obs;
+  final Category categoy = Get.arguments;
+  final RxList<Book> book = <Book>[].obs;
+  final RxString sortBy = 'Default'.obs;
 
   @override
   void onInit() {

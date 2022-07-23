@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:e_book_app/common_widget/stateful/download_alert.dart';
+import 'package:e_book_app/configs/defind.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/models/download_model.dart';
 import 'package:e_book_app/services/book_service.dart';
@@ -19,7 +20,9 @@ class DownloadController extends GetxController with StateMixin {
   @override
   Future<void> onInit() async {
     await _getDownload();
-    await _getBookDownloads();
+    if (_downloads.isNotEmpty) {
+      await _getBookDownloads();
+    }
     change(null, status: RxStatus.success());
     super.onInit();
   }
@@ -37,25 +40,36 @@ class DownloadController extends GetxController with StateMixin {
   }
 
   _getDownload() async {
-    Box db = await Hive.openBox('App');
+    Box db = Hive.box(Define.dbName);
     _downloads.clear();
-    List<String> data = db.get('Download', defaultValue: []);
+    List<String> data = db.get('Download', defaultValue: <String>[]);
 
     _downloads =
         data.map((e) => DownloadModel.fromJson(jsonDecode(e))).toList();
   }
 
-  addDownload(Book book) async {
+  Future<bool> addDownload(Book book) async {
     _checkPermision();
-    Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path;
+    PermissionStatus permission = await Permission.storage.status;
 
-    String pathFile = '$path/${book.id}.pdf';
-    Get.dialog(DownloadAlert(url: book.linkfileOnl ?? '', path: pathFile));
-    _downloads.add(DownloadModel(bookId: book.id ?? '', location: pathFile));
-    Box db = await Hive.openBox('app');
-    db.put('Download', _downloads.map((e) => jsonEncode(e)).toList());
-    _downloadedBook.add(book);
+    if (permission == PermissionStatus.granted) {
+      Directory dir = await getApplicationDocumentsDirectory();
+      String path = dir.path;
+      String pathFile = '$path/${book.id}.pdf';
+      bool? isSuccess = await Get.dialog<bool>(
+          DownloadAlert(url: book.linkfileOnl ?? '', path: pathFile));
+      if (isSuccess ?? false) {
+        _downloads
+            .add(DownloadModel(bookId: book.id ?? '', location: pathFile));
+
+        Box db = Hive.box(Define.dbName);
+        db.put('Download', _downloads.map((e) => jsonEncode(e)).toList());
+
+        _downloadedBook.add(book);
+        return true;
+      }
+    }
+    return false;
   }
 
   removeDownload(Book book) async {
@@ -63,8 +77,10 @@ class DownloadController extends GetxController with StateMixin {
         _downloads.firstWhere((element) => element.bookId == book.id);
     File file = File(downloadModel.location);
     file.delete();
-    Box db = await Hive.openBox('app');
+
+    Box db = Hive.box(Define.dbName);
     _downloads.removeWhere((element) => element.bookId == book.id);
+
     db.put('Download', _downloads.map((e) => jsonEncode(e)).toList());
     _downloadedBook.removeWhere((element) => element.id == book.id);
   }
@@ -85,5 +101,23 @@ class DownloadController extends GetxController with StateMixin {
     return _downloads
         .firstWhere((element) => element.bookId == bookId)
         .location;
+  }
+
+  void removeAllFileLocal() {
+    _downloads.clear();
+    _downloadedBook.clear();
+    for (var element in _downloads) {
+      File file = File(element.location);
+      file.delete();
+    }
+  }
+
+  int getStorageLength() {
+    var total = 0;
+    for (var element in _downloads) {
+      File file = File(element.location);
+      total += file.lengthSync();
+    }
+    return total;
   }
 }

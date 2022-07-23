@@ -5,16 +5,18 @@ import 'package:e_book_app/presetations/admin/categorys/pages/category_detail_pa
 import 'package:e_book_app/presetations/admin/dashboard/controller/dashbroad_binding.dart';
 import 'package:e_book_app/presetations/admin/dashboard/pages/dashbroad_page.dart';
 import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
-import 'package:e_book_app/presetations/book_detail/bindings/book_detail_binding.dart';
+import 'package:e_book_app/presetations/book_detail/controllers/book_detail_binding.dart';
 import 'package:e_book_app/presetations/book_detail/pages/book_detail_page.dart';
 import 'package:e_book_app/presetations/home/controllers/home_binding.dart';
 import 'package:e_book_app/presetations/home/pages/home_page.dart';
-import 'package:e_book_app/presetations/reading/binding/book_viewer_binding.dart';
+import 'package:e_book_app/presetations/reading/controller/book_viewer_binding.dart';
 import 'package:e_book_app/presetations/reading/pages/book_viewer_page.dart';
 import 'package:e_book_app/presetations/searching/binding/category_book_binding.dart';
 import 'package:e_book_app/presetations/searching/binding/seaching_book_binding.dart';
 import 'package:e_book_app/presetations/searching/pages/category_book_page.dart';
 import 'package:e_book_app/presetations/searching/pages/searching_page.dart';
+import 'package:e_book_app/presetations/user/controllers/edit_profile_controller.dart';
+import 'package:e_book_app/presetations/user/pages/user_edit_profile.dart';
 import 'package:get/get.dart';
 
 class Routes {
@@ -24,13 +26,9 @@ class Routes {
         name: SignInPage.route,
         page: () => SignInPage(),
       ),
-      // GetPage(
-      //   name: SignUpPage.route,
-      //   page: () => SignUpPage(),
-      // ),
       GetPage(
         name: HomePage.route,
-        page: () => HomePage(),
+        page: () => const HomePage(),
         binding: HomeBinding(),
       ),
       GetPage(
@@ -54,7 +52,6 @@ class Routes {
         name: BookEditPage.route,
         page: () => BookEditPage(),
       ),
-
       GetPage(
         name: BookViewerPage.route,
         page: () => const BookViewerPage(),
@@ -74,7 +71,14 @@ class Routes {
         name: BookDetailPage.route,
         page: () => const BookDetailPage(),
         binding: BookDetailBinding(),
-      )
+      ),
+      GetPage(
+        name: UserEditProfile.route,
+        page: () => const UserEditProfile(),
+        binding: BindingsBuilder(() {
+          Get.put(EditProfileController());
+        }),
+      ),
     ];
   }
 }

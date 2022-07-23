@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_book_app/configs/defind.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/models/review.dart';
-import 'package:e_book_app/services/user_services.dart';
+import 'package:e_book_app/presetations/user/controllers/user_controller.dart';
 import 'package:get/get.dart';
 
 class BookService extends GetxService {
@@ -85,22 +85,15 @@ class BookService extends GetxService {
 
   Future<List<Book>> getBooks(
       {required int index, required int padding}) async {
-    return await bookRef
-        .orderBy(
-          'updateAt',
-          descending: true,
-        )
-        .limit(padding)
-        .get()
-        .then((snapshot) =>
-            snapshot.docs.map((e) => Book.fromJson(e.data())).toList());
+    return await bookRef.limit(padding).get().then((snapshot) =>
+        snapshot.docs.map((e) => Book.fromJson(e.data())).toList());
   }
 
   Future<List<Review>> getAllReview({required String bookId}) async {
     final collection = bookRef.doc(bookId).collection('review');
     final data = await collection
         .where('userId',
-            isNotEqualTo: Get.find<UserService>().profile?.id ?? '')
+            isNotEqualTo: Get.find<UserController>().profile?.id ?? '')
         // .orderBy('update', descending: true)
         .get();
 
@@ -154,6 +147,9 @@ class BookService extends GetxService {
   }
 
   Future<List<Book>> getBookWithIdInList({required List<String> ids}) async {
+    if (ids.isEmpty) {
+      return [];
+    }
     return (await bookRef.where('id', whereIn: ids).get())
         .docs
         .map((e) => Book.fromJson(e.data()))

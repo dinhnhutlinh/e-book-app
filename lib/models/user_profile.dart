@@ -1,6 +1,8 @@
-import 'package:e_book_app/utils/date_util.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'package:e_book_app/utils/date_util.dart';
 
 part 'user_profile.g.dart';
 
@@ -39,6 +41,25 @@ class UserProfile {
   @override
   String toString() {
     return 'UserProfile(id: $id, name: $name, avatar: $avatar, isAdmin: $isAdmin, status: $status)';
+  }
+
+  UserProfile copyWith({
+    String? id,
+    String? name,
+    String? avatar,
+    String? email,
+    bool? isAdmin,
+    String? status,
+    DateTime? lastSignin,
+  }) {
+    return UserProfile(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      avatar: avatar ?? this.avatar,
+      email: email ?? this.email,
+      isAdmin: isAdmin ?? this.isAdmin,
+      status: status ?? this.status,
+    );
   }
 }
 

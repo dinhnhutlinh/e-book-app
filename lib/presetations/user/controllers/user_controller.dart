@@ -1,30 +1,31 @@
 import 'package:e_book_app/models/user_profile.dart';
-import 'package:e_book_app/presetations/auth/pages/sign_in_page.dart';
 import 'package:e_book_app/services/auth_service.dart';
 import 'package:e_book_app/services/user_services.dart';
 import 'package:get/get.dart';
 
-class UserController extends GetxController {
+class UserController extends GetxController with StateMixin {
   final _auhtService = Get.find<AuthService>();
   final _userService = Get.find<UserService>();
-  UserProfile? _profile;
-  final RxBool _isLoading = true.obs;
+  final Rxn<UserProfile> _profile = Rxn<UserProfile>();
 
   @override
   Future<void> onInit() async {
     String uid = _auhtService.user?.uid ?? '';
-    _profile = await _userService.getUserProfile(uid);
-    _isLoading.value = false;
 
+    if (await _userService.checkContainDocument(uid: uid)) {
+      _profile.value = await _userService.getUserProfile(uid);
+    } else {
+      _profile.value = _userService.createUserProfile();
+    }
+    _profile.value = await _userService.getUserProfile(uid);
+    change(null, status: RxStatus.success());
     super.onInit();
   }
 
-  void logout() {
-    _auhtService.signOut();
-    Get.offAllNamed(SignInPage.route);
-  }
-
-  UserProfile? get profile => _profile;
+  UserProfile? get profile => _profile.value;
   String get uid => _auhtService.user?.uid ?? '';
-  bool get isLoading => _isLoading.value;
+
+  void setProfile(UserProfile profile) {
+    _profile.value = profile;
+  }
 }

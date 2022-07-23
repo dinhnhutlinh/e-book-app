@@ -16,6 +16,7 @@ class Book {
   String? linkfileOnl;
   String? linkImgOnl;
   String? linkThumbnail;
+  int? pages;
   String? url;
   @TimestampConverter()
   DateTime? updateAt;
@@ -28,6 +29,7 @@ class Book {
     this.content,
     this.linkfileOnl,
     this.linkImgOnl,
+    this.pages,
     this.linkThumbnail,
     this.url,
     this.updateAt,

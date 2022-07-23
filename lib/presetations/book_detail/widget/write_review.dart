@@ -1,8 +1,7 @@
+import 'package:e_book_app/common_widget/stateless/review_list_tile.dart';
 import 'package:e_book_app/presetations/book_detail/controllers/book_detail_controller.dart';
-import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class WriteReview extends GetView<BookDetailController> {
   const WriteReview({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class WriteReview extends GetView<BookDetailController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Your review',
+                  'Your Review'.tr,
                   style: textTheme.titleMedium,
                 ),
                 Icon(
@@ -36,34 +35,13 @@ class WriteReview extends GetView<BookDetailController> {
             () => controller.ownReview != null
                 ? Column(
                     children: [
-                      RatingBar.builder(
-                        initialRating: controller.ownReview!.rate!.toDouble(),
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        itemCount: 5,
-                        itemSize: 24,
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(Icons.favorite,
-                            size: 16, color: customcolor1),
-                        onRatingUpdate: (rating) {},
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        controller.ownReview?.content ?? '',
-                        style: textTheme.bodyText2,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
+                      ReviewListTile(review: controller.ownReview!),
                       ButtonBar(
                         children: [
                           OutlinedButton(
                             onPressed: controller.deleteOwnReview,
                             child: Text(
-                              'Delete',
+                              'Delete'.tr,
                               style: textTheme.button!
                                   .copyWith(color: colorScheme.error),
                             ),
@@ -79,8 +57,8 @@ class WriteReview extends GetView<BookDetailController> {
                             ).copyWith(
                                 elevation: ButtonStyleButton.allOrNull(0.0)),
                             onPressed: controller.showReview,
-                            child: const Text(
-                              'Edit Review',
+                            child: Text(
+                              'Edit'.tr,
                             ),
                           ),
                         ],
@@ -90,8 +68,8 @@ class WriteReview extends GetView<BookDetailController> {
                 : Center(
                     child: OutlinedButton(
                       onPressed: controller.showReview,
-                      child: const Text(
-                        'Write your review',
+                      child: Text(
+                        'Write your review'.tr,
                       ),
                     ),
                   ),

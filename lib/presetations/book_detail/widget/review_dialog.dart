@@ -1,6 +1,5 @@
 import 'package:e_book_app/models/review.dart';
 import 'package:e_book_app/presetations/book_detail/controllers/book_detail_controller.dart';
-import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +10,7 @@ class ReviewDialog extends GetView<BookDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final content =
         TextEditingController(text: controller.ownReview?.content ?? '');
     double rate = controller.ownReview == null
@@ -26,10 +26,10 @@ class ReviewDialog extends GetView<BookDetailController> {
                       rate: rate.toInt(),
                       content: content.text,
                       update: DateTime.now()));
-              Fluttertoast.showToast(msg: 'Edit success');
+              Fluttertoast.showToast(msg: 'Success'.tr);
               Get.back();
             },
-            child: const Text('Submit'),
+            child: Text('Submit'.tr),
           ),
         ],
       ),
@@ -40,8 +40,8 @@ class ReviewDialog extends GetView<BookDetailController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Your Review',
+            Text(
+              'Your Review'.tr,
             ),
             const SizedBox(
               height: 12,
@@ -53,9 +53,9 @@ class ReviewDialog extends GetView<BookDetailController> {
               // allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => const Icon(
+              itemBuilder: (context, _) => Icon(
                 Icons.favorite,
-                color: customcolor1,
+                color: colorScheme.primary,
               ),
               onRatingUpdate: (rating) {
                 rate = rating;
@@ -68,9 +68,9 @@ class ReviewDialog extends GetView<BookDetailController> {
               controller: content,
               maxLength: 1000,
               maxLines: null,
-              decoration: const InputDecoration(
-                labelText: 'Review',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: 'Review'.tr,
+                border: const OutlineInputBorder(),
               ),
             ),
           ],

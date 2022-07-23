@@ -15,7 +15,7 @@ class SearchingPage extends GetView<SearchingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search')),
+      appBar: AppBar(title: Text('search'.tr)),
       body: Column(
         children: [
           Padding(
@@ -26,7 +26,7 @@ class SearchingPage extends GetView<SearchingController> {
                       onTap: () =>
                           controller.searchWithQuery(txtController.text),
                       child: const Icon(Icons.search)),
-                  hintText: 'Searching book',
+                  hintText: 'searching book'.tr,
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(12),

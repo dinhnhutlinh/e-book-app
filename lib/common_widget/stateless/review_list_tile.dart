@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book_app/models/review.dart';
-import 'package:e_book_app/utils/custom_color.g.dart';
 import 'package:flutter/material.dart';
 
 class ReviewListTile extends StatelessWidget {
@@ -12,6 +11,7 @@ class ReviewListTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
       leading: SizedBox(
         child: ClipOval(
@@ -34,9 +34,9 @@ class ReviewListTile extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              const Icon(
+              Icon(
                 Icons.favorite,
-                color: customcolor1,
+                color: colorScheme.primary,
               ),
             ],
           ),

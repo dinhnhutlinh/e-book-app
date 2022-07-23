@@ -11,13 +11,17 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class BookViewerController extends GetxController with StateMixin {
   final _downloadController = Get.find<DownloadController>();
-  final _progressController = Get.find<ProgressController>();
   final Book book = Get.arguments;
   late Uint8List _pdfData;
 
   late String _pathFile;
+  late File _file;
 
   PdfViewerController pdfController = PdfViewerController();
+
+  late int pages;
+
+  late int curerentPage;
 
   Future<Uint8List> createFileOfPdfUrl(String url) async {
     var request = await HttpClient().getUrl(Uri.parse(url));
@@ -36,22 +40,24 @@ class BookViewerController extends GetxController with StateMixin {
     super.onInit();
 
     change(null, status: RxStatus.loading());
-    pdfController
-        .jumpToPage(await _progressController.getProgressBook(book.id ?? ''));
+    curerentPage =
+        Get.find<ProgressController>().getProgressBook(book.id ?? '');
+    pdfController.jumpToPage(curerentPage);
+
+    pages = pdfController.pageCount;
     _pathFile = _downloadController.getPathLocalOfBook(bookId: book.id ?? '');
+    _file = File(_pathFile);
     change(null, status: RxStatus.success());
-    // await loadFileFromLocal(path).then((value) {
-    //   _pdfData = value;
-    //   change(null, status: RxStatus.success());
-    // }).onError((error, stackTrace) {
-    //   change(null, status: RxStatus.error());
-    // });
   }
 
   Uint8List get data => _pdfData;
   String get pathFile => _pathFile;
+  File get file => _file;
 
-  saveProgress(int newPageNumber) {
-    _progressController.addProgressBook(book.id ?? '', newPageNumber);
+  void saveProgress(int newPageNumber) {
+    if (newPageNumber == curerentPage) {
+      return;
+    }
+    Get.find<ProgressController>().addProgressBook(book, newPageNumber);
   }
 }

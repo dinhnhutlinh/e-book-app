@@ -50,7 +50,7 @@ class MoreOptionBook extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.book_outlined),
-            title: const Text('About this book'),
+            title: Text('About this book'.tr),
             onTap: () {
               Get.back();
               Get.toNamed(BookDetailPage.route, arguments: book);
@@ -63,8 +63,8 @@ class MoreOptionBook extends StatelessWidget {
             Column(
               children: [
                 ListTile(
-                  leading: const Icon(Icons.book_outlined),
-                  title: const Text('Read book'),
+                  leading: const Icon(Icons.menu_book_sharp),
+                  title: Text('Read'.tr),
                   onTap: () {
                     Get.back();
                     Get.toNamed(BookViewerPage.route, arguments: book);
@@ -78,7 +78,7 @@ class MoreOptionBook extends StatelessWidget {
           _favController.checkFavBook(book.id ?? '')
               ? ListTile(
                   leading: const Icon(Icons.favorite_border_outlined),
-                  title: const Text('Dont\'t like this book'),
+                  title: Text('Don\'t like this book'.tr),
                   onTap: () {
                     Get.back();
                     _favController.removeFavBook(book: book);
@@ -86,7 +86,7 @@ class MoreOptionBook extends StatelessWidget {
                 )
               : ListTile(
                   leading: const Icon(Icons.favorite_border_outlined),
-                  title: const Text('Like'),
+                  title: Text('Like'.tr),
                   onTap: () {
                     Get.back();
                     _favController.addFavBook(book: book);
@@ -98,7 +98,7 @@ class MoreOptionBook extends StatelessWidget {
           _downloadController.checkDownload(bookId: book.id ?? '')
               ? ListTile(
                   leading: const Icon(Icons.download_done),
-                  title: const Text('Remove download'),
+                  title: Text('Remove download'.tr),
                   onTap: () {
                     Get.back();
                     _downloadController.removeDownload(book);
@@ -106,7 +106,7 @@ class MoreOptionBook extends StatelessWidget {
                 )
               : ListTile(
                   leading: const Icon(Icons.download),
-                  title: const Text('Download'),
+                  title: Text('Download'.tr),
                   onTap: () {
                     Get.back();
                     _downloadController.addDownload(book);

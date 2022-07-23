@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_book_app/common_widget/stateful/custom_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DownloadAlert extends StatefulWidget {
   final String url;
@@ -25,15 +26,17 @@ class _DownloadAlertState extends State<DownloadAlert> {
       widget.path,
       deleteOnError: true,
       onReceiveProgress: (receivedBytes, totalBytes) {
-        setState(() {
-          received = receivedBytes;
-          total = totalBytes;
-          progress = (received / total * 100).toStringAsFixed(0);
-        });
+        if (mounted) {
+          setState(() {
+            received = receivedBytes;
+            total = totalBytes;
+            progress = (received / total * 100).toStringAsFixed(0);
+          });
+        }
 
         //Check if download is complete and close the alert dialog
         if (receivedBytes == totalBytes) {
-          Navigator.pop(context, '100');
+          Get.back<bool>(result: true);
         }
       },
     );
@@ -43,6 +46,12 @@ class _DownloadAlertState extends State<DownloadAlert> {
   void initState() {
     super.initState();
     download();
+  }
+
+  @override
+  void dispose() {
+    dio.close(force: true);
+    super.dispose();
   }
 
   @override
@@ -57,9 +66,9 @@ class _DownloadAlertState extends State<DownloadAlert> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Text(
-                'Downloading...',
-                style: TextStyle(
+              Text(
+                '${'Downloading'.tr}...',
+                style: const TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -96,6 +105,15 @@ class _DownloadAlertState extends State<DownloadAlert> {
                   ),
                 ],
               ),
+              ButtonBar(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        Get.back<bool>(result: false);
+                      },
+                      child: Text('Cancel'.tr))
+                ],
+              )
             ],
           ),
         ),

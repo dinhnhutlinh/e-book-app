@@ -1,6 +1,6 @@
 import 'package:e_book_app/presetations/book_detail/controllers/book_detail_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class AboutThisBook extends GetView<BookDetailController> {
   const AboutThisBook({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class AboutThisBook extends GetView<BookDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About this book'),
+        title: Text('About this book'.tr),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(

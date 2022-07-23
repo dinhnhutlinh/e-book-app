@@ -10,7 +10,8 @@ class BooksController extends GetxController {
   static const route = '/Books';
   final _bookServices = Get.find<BookService>();
 
-  final RxList<Book> _books = <Book>[].obs;
+  List<Book> _books = <Book>[];
+  final RxString _query = ''.obs;
   final RxBool _wasLoad = false.obs;
 
   final scollController = ScrollController();
@@ -30,8 +31,6 @@ class BooksController extends GetxController {
     });
 
     await fetchData();
-    // changeURLBook();
-
     super.onInit();
   }
 
@@ -54,16 +53,16 @@ class BooksController extends GetxController {
 
   Future<void> fetchData() async {
     _wasLoad.value = false;
-    _books.value = await _bookServices.getAllBook();
+    _books = await _bookServices.getAllBook();
     _wasLoad.value = true;
   }
 
   void query(String value) {
-    _books.value = _books
-        .where((element) => element.name?.contains(value) ?? false)
-        .toList();
+    _query.value = value;
   }
 
-  List<Book> get books => _books;
+  List<Book> get books => _books
+      .where((element) => element.name?.contains(_query.value) ?? false)
+      .toList();
   bool get isVisibleFloatButton => _isShowFloatButton.value;
 }

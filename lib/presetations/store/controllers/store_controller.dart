@@ -7,7 +7,7 @@ class StoreController extends GetxController with StateMixin {
   final RxList<Book> _books = <Book>[].obs;
 
   final RxBool _isLoadMore = true.obs;
-  final int paging = 5;
+  final int paging = 15;
 
   @override
   Future<void> onInit() async {

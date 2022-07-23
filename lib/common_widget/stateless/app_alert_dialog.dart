@@ -21,7 +21,7 @@ class AppAlertDialog {
               Get.back();
               onCancel?.call();
             },
-            child: Text(textCancel ?? 'Huỷ'),
+            child: Text(textCancel ?? 'Cancel'.tr),
           ),
           if (textConfirm != null)
             TextButton(

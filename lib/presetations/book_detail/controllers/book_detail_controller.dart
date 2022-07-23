@@ -79,9 +79,11 @@ class BookDetailController extends GetxController {
         bookId: book.id ?? '', userId: Get.find<UserController>().uid);
   }
 
-  void downloadBook() {
-    _downloadController.addDownload(book);
-    _wasDownload.value = true;
+  Future<void> downloadBook() async {
+    bool isSuccess = await _downloadController.addDownload(book);
+    if (isSuccess) {
+      _wasDownload.value = true;
+    }
   }
 
   Future<void> addReview({required Review review}) async {

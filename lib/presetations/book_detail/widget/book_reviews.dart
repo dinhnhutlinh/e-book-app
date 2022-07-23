@@ -3,7 +3,7 @@ import 'package:e_book_app/models/review.dart';
 import 'package:e_book_app/presetations/book_detail/controllers/book_detail_controller.dart';
 import 'package:e_book_app/common_widget/stateless/review_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class BookReview extends GetView<BookDetailController> {
   const BookReview({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class BookReview extends GetView<BookDetailController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Ratings and reviews',
+                  'Rating and reviews'.tr,
                   style: textTheme.titleMedium,
                 ),
                 Icon(
@@ -38,8 +38,8 @@ class BookReview extends GetView<BookDetailController> {
           ),
           Obx(
             () => controller.ratings.isEmpty
-                ? const Center(
-                    child: Text('No review'),
+                ? Center(
+                    child: Text('No review'.tr),
                   )
                 : Column(
                     children: [

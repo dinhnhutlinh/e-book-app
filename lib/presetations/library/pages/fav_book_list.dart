@@ -14,12 +14,32 @@ class FavoriteBookList extends GetView<FavBookController> {
         child: CircularProgressIndicator(),
       ),
       (state) => Obx(
-        () => ListView(
-          padding: const EdgeInsets.only(top: 12),
-          children: [
-            for (Book book in controller.farBooks) BookTile(book: book),
-          ],
-        ),
+        () => controller.farBooks.isEmpty
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.upcoming_outlined,
+                      size: 96,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Text(
+                      'Empty'.tr,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    )
+                  ],
+                ),
+              )
+            : ListView(
+                padding: const EdgeInsets.only(top: 12),
+                children: [
+                  for (Book book in controller.farBooks) BookTile(book: book),
+                ],
+              ),
       ),
     );
   }

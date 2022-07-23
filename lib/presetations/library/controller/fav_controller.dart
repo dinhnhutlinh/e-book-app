@@ -19,7 +19,6 @@ class FavBookController extends GetxController with StateMixin {
   _fetchBook() async {
     List<Book> books =
         await _bookService.favoriteBook(uid: Get.find<UserController>().uid);
-
     _favBooks.addAll(books);
   }
 
@@ -40,6 +39,4 @@ class FavBookController extends GetxController with StateMixin {
   }
 
   List<Book> get farBooks => _favBooks;
-
-  
 }
