@@ -16,17 +16,17 @@ class AuthController extends GetxController {
   Future<void> signIn({required String email, required String password}) async {
     final mess = validate(email, password, password);
     if (mess != null) {
-      AppAlertDialog.show(title: 'Error', content: mess);
+      AppAlertDialog.show(title: 'Error'.tr, content: mess);
       return;
     }
-    EasyLoading.show(status: 'Xin chờ');
+    EasyLoading.show();
     await _auhtService.signIn(email: email, password: password).then((value) {
       EasyLoading.dismiss();
       Get.offAllNamed(HomePage.route);
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       if (error is AuthException) {
-        AppAlertDialog.show(title: 'Lỗi', content: error.mess);
+        AppAlertDialog.show(title: 'Error'.tr, content: error.mess);
       }
     });
   }
@@ -37,34 +37,34 @@ class AuthController extends GetxController {
       required String repass}) async {
     final mess = validate(email, password, repass);
     if (mess != null) {
-      AppAlertDialog.show(title: 'Error', content: mess);
+      AppAlertDialog.show(title: 'Error'.tr, content: mess);
       return;
     }
-    EasyLoading.show(status: 'Xin chờ');
+    EasyLoading.show();
     await _auhtService.signUp(email: email, password: password).then((value) {
       EasyLoading.dismiss();
       Get.offAllNamed(HomePage.route);
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       if (error is AuthException) {
-        AppAlertDialog.show(title: 'Lỗi', content: error.mess);
+        AppAlertDialog.show(title: 'Error'.tr, content: error.mess);
       }
     });
   }
 
   String? validate(String email, String password, String repass) {
     if (email.isEmpty) {
-      return 'Pleace write Email';
+      return 'Pleace write Email'.tr;
     }
     if (password.isEmpty) {
-      return 'Pleace write password';
+      return 'Pleace write password'.tr;
     }
     if (repass.isEmpty) {
-      return 'Pleace write repassword';
+      return 'Pleace write repassword'.tr;
     }
-    if (!email.isEmail) return 'Email don\'t wrong format ';
+    if (!email.isEmail) return 'Invalid email'.tr;
 
-    if (password != repass) return 'Password and repasssword don\'t correct';
+    if (password != repass) return 'Password and repasssword don\'t correct'.tr;
 
     return null;
   }
@@ -78,7 +78,7 @@ class AuthController extends GetxController {
       EasyLoading.dismiss();
       AppAlertDialog.show(
         title: 'Error'.tr,
-        content: 'Can\'t sign in',
+        content: 'Can\'t sign in'.tr,
       );
     });
   }
@@ -100,7 +100,7 @@ class AuthController extends GetxController {
   void forgetPassword(String email) {
     FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     AppAlertDialog.show(
-        title: 'Forget password', content: 'Check your mail box');
+        title: 'Forget password'.tr, content: 'Check your mail box'.tr);
   }
 
   Future<void> signOut() async {

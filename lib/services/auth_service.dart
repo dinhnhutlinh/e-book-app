@@ -15,14 +15,14 @@ class AuthService extends GetxService {
         .onError((error, stackTrace) {
       if (error is FirebaseAuthException) {
         if (error.code == 'user-disabled') {
-          throw AuthException('tài khoản đã bị khóa');
+          throw AuthException('Account disabled'.tr);
         } else if (error.code == 'user-not-found') {
-          throw AuthException('Tài khoản không tồn tại');
+          throw AuthException('User not found'.tr);
         } else if (error.code == 'invalid-email') {
-          throw AuthException('Email không tồn tại');
+          throw AuthException('Invalid email'.tr);
         }
       }
-      throw AuthException('Không thể kết nối mạng');
+      throw AuthException('Can\'t connect'.tr);
     });
     return userCredential.user;
   }
@@ -34,14 +34,14 @@ class AuthService extends GetxService {
         .onError((error, stackTrace) {
       if (error is FirebaseAuthException) {
         if (error.code == 'weak-password') {
-          throw AuthException('mật khẩu quá yếu');
+          throw AuthException('Weak password'.tr);
         } else if (error.code == 'email-already-in-use') {
-          throw AuthException('Email đã được sử dụng');
+          throw AuthException('Email already in use'.tr);
         } else if (error.code == 'invalid-email') {
-          throw AuthException('Email không tồn tại');
+          throw AuthException('Invalid email'.tr);
         }
       }
-      throw AuthException('Không thể kết nối');
+      throw AuthException('Can\'t connect'.tr);
     });
     return _firebaseAuth.currentUser;
   }
@@ -55,7 +55,7 @@ class AuthService extends GetxService {
 
   Future<User?> signInWithGoogle() async {
     final googleUser = await _googleSignIn.signIn().onError(
-        (error, stackTrace) => throw AuthException('Không thể kết nối'));
+        (error, stackTrace) => throw AuthException('Invalid email'.tr));
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
     final credential = GoogleAuthProvider.credential(

@@ -1,3 +1,4 @@
+import 'package:e_book_app/presetations/admin/books/controller/books_controller.dart';
 import 'package:e_book_app/presetations/admin/categorys/controller/categories_controller.dart';
 import 'package:e_book_app/presetations/home/controllers/home_controller.dart';
 import 'package:e_book_app/presetations/library/controller/download_controller.dart';
@@ -18,7 +19,8 @@ class HomeBinding extends Bindings {
     Get.put(FavBookController());
     Get.put(DownloadController());
     Get.put(ProgressController());
-    Get.put(CategoriesController());
+    Get.put(CategoriesController(), permanent: true);
+    Get.put(BooksController(), permanent: true);
     Get.put(StoreController());
     Get.put(TrendBookController());
     Get.put(SettingController());

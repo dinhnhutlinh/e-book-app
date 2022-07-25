@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BooksPage extends StatelessWidget {
-  final _bookController = Get.put(BooksController());
+  final _bookController = Get.find<BooksController>();
   static const route = '/BooksManager';
 
   BooksPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _bookController.query('');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -46,9 +47,9 @@ class BooksPage extends StatelessWidget {
               left: 12,
             ),
             child: TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Search by name',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: 'Search by name'.tr,
               ),
               maxLines: 1,
               onChanged: _bookController.query,

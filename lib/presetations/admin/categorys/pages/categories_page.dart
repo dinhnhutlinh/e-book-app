@@ -11,7 +11,7 @@ class CategoriesPage extends StatelessWidget {
 
   CategoriesPage({Key? key}) : super(key: key);
 
-  final _categoriesController = Get.put(CategoriesController());
+  final _categoriesController = Get.find<CategoriesController>();
 
   @override
   Widget build(BuildContext context) {

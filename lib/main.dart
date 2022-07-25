@@ -9,6 +9,7 @@ import 'package:e_book_app/themes/custom_color.g.dart';
 import 'package:e_book_app/utils/langs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -17,7 +18,9 @@ import 'presetations/app_binding.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   await initServices();
@@ -25,7 +28,9 @@ Future<void> main(List<String> args) async {
     ..displayDuration = const Duration(milliseconds: 2000)
     ..userInteractions = true
     ..maskColor = Colors.black.withOpacity(0.2)
+    ..maskType = EasyLoadingMaskType.black
     ..dismissOnTap = false;
+
   runApp(const MyApp());
 }
 

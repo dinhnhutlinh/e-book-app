@@ -3,6 +3,7 @@ import 'package:e_book_app/presetations/store/controllers/trend_book_controller.
 import 'package:e_book_app/presetations/store/widget/book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TrendBookCarousel extends GetView<TrendBookController> {
   const TrendBookCarousel({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class TrendBookCarousel extends GetView<TrendBookController> {
     return controller.obx(
         (state) => Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: colorScheme.secondaryContainer,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8),
@@ -56,8 +57,14 @@ class TrendBookCarousel extends GetView<TrendBookController> {
                 ),
               ),
             ),
-        onLoading: const Center(
-          child: CircularProgressIndicator(),
+        onLoading: Shimmer.fromColors(
+          baseColor: Colors.grey,
+          highlightColor: Colors.grey.withOpacity(0.2),
+          child: SizedBox(
+            height: 192,
+            width: Get.width,
+            child: const Card(margin: EdgeInsets.zero),
+          ),
         ));
   }
 }

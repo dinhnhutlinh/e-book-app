@@ -20,8 +20,8 @@ class SettingPage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colorScheme.primaryContainer,
-        title: const Text('Setting'),
+        backgroundColor: colorScheme.secondaryContainer,
+        title: Text('Setting'.tr),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),

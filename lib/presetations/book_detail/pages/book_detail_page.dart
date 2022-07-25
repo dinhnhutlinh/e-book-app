@@ -19,7 +19,7 @@ class BookDetailPage extends GetView<BookDetailController> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: colorScheme.primaryContainer,
+            backgroundColor: colorScheme.secondaryContainer,
             actions: [
               Obx(
                 () => IconButton(
@@ -46,7 +46,7 @@ class BookDetailPage extends GetView<BookDetailController> {
               delegate: SliverChildListDelegate([
             Container(
               decoration: BoxDecoration(
-                color: colorScheme.primaryContainer,
+                color: colorScheme.secondaryContainer,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(12),
                   bottomRight: Radius.circular(12),
@@ -115,14 +115,18 @@ class BookDetailPage extends GetView<BookDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        Get.toNamed(
-                                          BookViewerPage.route,
-                                          arguments: controller.book,
-                                        );
-                                      },
-                                      child: Text('Read'.tr),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        onPrimary: Theme.of(context)
+                                            .colorScheme
+                                            .onError,
+                                        primary:
+                                            Theme.of(context).colorScheme.error,
+                                      ).copyWith(
+                                          elevation:
+                                              ButtonStyleButton.allOrNull(0.0)),
+                                      onPressed: controller.deleteDownload,
+                                      child: Text('Delete'.tr),
                                     ),
                                   ),
                                   const SizedBox(
@@ -133,15 +137,20 @@ class BookDetailPage extends GetView<BookDetailController> {
                                       style: ElevatedButton.styleFrom(
                                         onPrimary: Theme.of(context)
                                             .colorScheme
-                                            .primaryContainer,
+                                            .onPrimary,
                                         primary: Theme.of(context)
                                             .colorScheme
                                             .primary,
                                       ).copyWith(
                                           elevation:
                                               ButtonStyleButton.allOrNull(0.0)),
-                                      onPressed: controller.deleteDownload,
-                                      child: Text('Delete'.tr),
+                                      onPressed: () {
+                                        Get.toNamed(
+                                          BookViewerPage.route,
+                                          arguments: controller.book,
+                                        );
+                                      },
+                                      child: Text('Read'.tr),
                                     ),
                                   ),
                                 ],

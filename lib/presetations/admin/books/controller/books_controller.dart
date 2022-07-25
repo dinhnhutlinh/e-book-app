@@ -65,4 +65,15 @@ class BooksController extends GetxController {
       .where((element) => element.name?.contains(_query.value) ?? false)
       .toList();
   bool get isVisibleFloatButton => _isShowFloatButton.value;
+
+  void addBook({required Book book}) {
+    int index = _books.indexWhere(
+      (element) => element.id!.toLowerCase() == book.id!.toLowerCase(),
+    );
+    if (index != -1) {
+      _books[index] = book;
+    } else {
+      _books.add(book);
+    }
+  }
 }

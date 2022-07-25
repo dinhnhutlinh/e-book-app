@@ -13,7 +13,7 @@ class LibPage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colorScheme.primaryContainer,
+        backgroundColor: colorScheme.secondaryContainer,
         title: Text('Library'.tr),
       ),
       body: DefaultTabController(
@@ -29,7 +29,7 @@ class LibPage extends StatelessWidget {
                 indicatorColor: colorScheme.primary,
                 tabs: [
                   Tab(
-                    text: 'Progresss'.tr,
+                    text: 'Progress'.tr,
                   ),
                   Tab(
                     text: 'Favorate'.tr,

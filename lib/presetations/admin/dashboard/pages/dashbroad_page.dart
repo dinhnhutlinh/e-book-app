@@ -5,6 +5,7 @@ import 'package:e_book_app/presetations/admin/categorys/pages/categories_page.da
 import 'package:e_book_app/presetations/admin/dashboard/controller/dashbroad_controller.dart';
 import 'package:e_book_app/presetations/admin/dashboard/widgets/cat_button.dart';
 import 'package:e_book_app/presetations/admin/dashboard/widgets/manager_tile.dart';
+import 'package:e_book_app/presetations/home/pages/home_page.dart';
 import 'package:e_book_app/presetations/user/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,31 +49,42 @@ class DashboardPage extends GetView<DashboardController> {
                                 padding: const EdgeInsets.all(12),
                                 child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: CircleAvatar(
-                                    child: ClipOval(
-                                      child: Obx(
-                                        () => Get.find<UserController>()
-                                                    .profile !=
-                                                null
-                                            ? CachedNetworkImage(
-                                                imageUrl:
-                                                    Get.find<UserController>()
+                                  child: Column(
+                                    children: [
+                                      CircleAvatar(
+                                        child: ClipOval(
+                                          child: Obx(
+                                            () => Get.find<UserController>()
+                                                        .profile !=
+                                                    null
+                                                ? CachedNetworkImage(
+                                                    imageUrl: Get.find<
+                                                                UserController>()
                                                             .profile
                                                             ?.avatar ??
                                                         '',
-                                                width: 40,
-                                                height: 40,
-                                                fit: BoxFit.cover,
-                                                placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(),
-                                                errorWidget: (context, url,
-                                                        error) =>
-                                                    Assets.resources.icons.user
-                                                        .svg(),
-                                              )
-                                            : const CircularProgressIndicator(),
+                                                    width: 40,
+                                                    height: 40,
+                                                    fit: BoxFit.cover,
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        const CircularProgressIndicator(),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Assets.resources
+                                                                .icons.user
+                                                                .svg(),
+                                                  )
+                                                : const CircularProgressIndicator(),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.offAllNamed(HomePage.route);
+                                          },
+                                          child: const Text('Back to store'))
+                                    ],
                                   ),
                                 ),
                               ),
@@ -85,14 +97,15 @@ class DashboardPage extends GetView<DashboardController> {
                                       Expanded(
                                         child: TitleIconButton(
                                           title: 'Book'.tr,
-                                          content: '1000',
+                                          content: '${controller.countBook}',
                                           primaryColor: Colors.orange,
                                         ),
                                       ),
                                       Expanded(
                                         child: TitleIconButton(
                                           title: 'Category'.tr,
-                                          content: '100',
+                                          content:
+                                              '${controller.countCategory}',
                                           primaryColor: Colors.green,
                                         ),
                                       ),
@@ -113,7 +126,8 @@ class DashboardPage extends GetView<DashboardController> {
                           padding: const EdgeInsets.all(12),
                           child: ManagerTile(
                             title: const Text('Book manager'),
-                            subTitle: Text('Quatity ${controller.countBooks}'),
+                            subTitle:
+                                Text('${'Quatity'.tr} ${controller.countBook}'),
                             trailing: Assets.resources.icons.bookshelf.svg(
                               height: 36,
                             ),
@@ -125,8 +139,8 @@ class DashboardPage extends GetView<DashboardController> {
                               right: 12, left: 12, bottom: 12),
                           child: ManagerTile(
                             title: const Text('Category manager'),
-                            subTitle:
-                                Text('Quatity ${controller.countCategory}'),
+                            subTitle: Text(
+                                '${'Quatity'.tr} ${controller.countCategory}'),
                             trailing: Assets.resources.icons.alignLeftTwo.svg(
                               height: 36,
                             ),

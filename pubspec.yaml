@@ -48,6 +48,8 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^20.2.39-beta
   carousel_slider: ^4.1.1
   image_picker: ^0.8.5+3
+  file_picker: ^3.0.4
+  flutter_launcher_icons: ^0.9.3
 
 dev_dependencies:
   flutter_test:
@@ -61,11 +63,14 @@ flutter_gen:
   integrations:
     flutter_svg: true
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "resources/images/icon_lanch.png"
+
 flutter:
   uses-material-design: true
   assets:
     - resources/images/
     - resources/icons/
     - resources/langs/
-    - assets/category.json
-    - assets/book2.json

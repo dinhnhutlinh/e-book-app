@@ -24,10 +24,10 @@ class SettingController extends GetxController {
     Get.dialog(const SelectThemeDialog());
   }
 
-  setTheme(ThemeMode mode) async {
+  setTheme(ThemeMode mode) {
     _themeMode.value = mode;
     Get.changeThemeMode(mode);
-    final db = await Hive.openBox('App');
+    final db = Hive.box(Define.dbName);
     db.put('themeMode', mode.name);
   }
 }

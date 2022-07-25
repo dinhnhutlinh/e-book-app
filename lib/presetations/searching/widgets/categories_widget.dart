@@ -1,11 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:e_book_app/presetations/searching/controller/searching_controller.dart';
+import 'package:e_book_app/presetations/admin/categorys/controller/categories_controller.dart';
 import 'package:e_book_app/presetations/searching/pages/category_book_page.dart';
-import 'package:e_book_app/themes/custom_color.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoriesWidget extends GetView<SearchingController> {
+class CategoriesWidget extends GetView<CategoriesController> {
   final colors = [Colors.red, Colors.green, Colors.orange];
 
   CategoriesWidget({Key? key}) : super(key: key);
@@ -28,11 +27,9 @@ class CategoriesWidget extends GetView<SearchingController> {
         padding: const EdgeInsets.all(16),
         itemCount: controller.categories.length,
         itemBuilder: (context, index) => ElevatedButton(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Theme.of(context)
-                .extension<CustomColors>()!
-                .customcolor1Container,
-            primary: Theme.of(context).extension<CustomColors>()?.customcolor1,
+          style: ElevatedButton.styleFrom(
+            primary: Theme.of(context).colorScheme.secondary,
+            onPrimary: Theme.of(context).colorScheme.onSecondary,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),

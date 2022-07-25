@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_book_app/configs/defind.dart';
 import 'package:e_book_app/models/book.dart';
 import 'package:e_book_app/models/review.dart';
 import 'package:e_book_app/presetations/user/controllers/user_controller.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 
 class BookService extends GetxService {
   final bookRef = FirebaseFirestore.instance.collection(Define.book);
   final reviewRef = FirebaseFirestore.instance.collection(Define.review);
+  final bookImageRef = FirebaseStorage.instance.ref().child('images');
+  final bookPdfRef = FirebaseStorage.instance.ref().child('pdf');
 
   Future<List<Book>> getAllBook() async =>
       (await bookRef.get()).docs.map((e) => Book.fromJson(e.data())).toList();
@@ -157,9 +162,22 @@ class BookService extends GetxService {
   }
 
   Future<List<Book>> getTrendBook() async {
-    return (await bookRef.limit(10).get())
+    return (await bookRef.limit(10).where('update').get())
         .docs
         .map((e) => Book.fromJson(e.data()))
         .toList();
+  }
+
+  Future<String> uploadImage(
+      {required File image, required String bookId}) async {
+    final task = bookImageRef.child(bookId).putFile(image);
+    final snap = await task.whenComplete(() {});
+    return snap.ref.getDownloadURL();
+  }
+
+  Future<String> uploadPdf({required File pdf, required String bookId}) async {
+    final task = bookPdfRef.child(bookId).putFile(pdf);
+    final snap = await task.whenComplete(() {});
+    return snap.ref.getDownloadURL();
   }
 }

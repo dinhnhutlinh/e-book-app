@@ -33,7 +33,7 @@ class Routes {
       ),
       GetPage(
         name: DashboardPage.name,
-        page: () => DashboardPage(),
+        page: () => const DashboardPage(),
         binding: DashboardBinding(),
       ),
       GetPage(

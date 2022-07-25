@@ -17,13 +17,23 @@ class SignInPage extends GetView<AuthController> {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: colorScheme.surfaceVariant,
+      appBar: AppBar(
+        backgroundColor: colorScheme.primaryContainer,
+        toolbarHeight: 0,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                SizedBox(
+                Container(
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(24),
+                      bottomRight: Radius.circular(24),
+                    ),
+                  ),
                   height: Get.height / 3,
                   child: Center(
                     child: Assets.resources.images.logoOrange.image(
@@ -40,7 +50,7 @@ class SignInPage extends GetView<AuthController> {
                         children: [
                           Align(
                             alignment: Alignment.bottomLeft,
-                            child: Text('Wellcome to EBOOK',
+                            child: Text('Welcome to EBOOK'.tr,
                                 style: textTheme.headline5?.copyWith(
                                     color: colorScheme.primary,
                                     fontWeight: FontWeight.bold)),
@@ -50,9 +60,9 @@ class SignInPage extends GetView<AuthController> {
                           ),
                           TextField(
                             controller: email,
-                            decoration: const InputDecoration(
-                              labelText: 'Email',
-                              border: OutlineInputBorder(),
+                            decoration: InputDecoration(
+                              labelText: 'Email'.tr,
+                              border: const OutlineInputBorder(),
                             ),
                           ),
                           const SizedBox(
@@ -61,9 +71,9 @@ class SignInPage extends GetView<AuthController> {
                           TextField(
                             controller: password,
                             obscureText: true,
-                            decoration: const InputDecoration(
-                              labelText: 'Password',
-                              border: OutlineInputBorder(),
+                            decoration: InputDecoration(
+                              labelText: 'Password'.tr,
+                              border: const OutlineInputBorder(),
                             ),
                           ),
                           const SizedBox(
@@ -76,7 +86,7 @@ class SignInPage extends GetView<AuthController> {
                                 OutlinedButton(
                                   onPressed: () =>
                                       Get.dialog(EmailInputPopup()),
-                                  child: const Text('Forget password'),
+                                  child: Text('Forget password'.tr),
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -96,7 +106,7 @@ class SignInPage extends GetView<AuthController> {
                                   onPressed: () => controller.signIn(
                                       email: email.text,
                                       password: password.text),
-                                  child: const Text('Login'),
+                                  child: Text('Login'.tr),
                                 ),
                               ],
                             ),
@@ -104,21 +114,23 @@ class SignInPage extends GetView<AuthController> {
                           const SizedBox(
                             height: 24,
                           ),
-                          ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
+                          OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              // Foreground color
+
                               padding: const EdgeInsets.only(
                                   right: 32, left: 32, top: 12, bottom: 12),
                             ),
                             onPressed: controller.signInWithGoogle,
                             icon: Assets.resources.icons.googleLogo.svg(),
-                            label: const Text('Sign in with google'),
+                            label: Text('Sign in with Google'.tr),
                           ),
                           const SizedBox(
                             height: 12,
                           ),
                           TextButton(
                               onPressed: () => Get.bottomSheet(SignUpBts()),
-                              child: const Text('Sign up'))
+                              child: Text('Sign up'.tr))
                         ],
                       ),
                     ),

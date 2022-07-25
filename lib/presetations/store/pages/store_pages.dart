@@ -17,7 +17,7 @@ class StorePage extends GetView<StoreController> {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colorScheme.primaryContainer,
+        backgroundColor: colorScheme.secondaryContainer,
         title: Text('explore'.tr),
         actions: [
           IconButton(

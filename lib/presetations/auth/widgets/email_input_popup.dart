@@ -9,15 +9,15 @@ class EmailInputPopup extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: const Text('Forget password'),
+      title: Text('Forget password'.tr),
       children: [
         Padding(
           padding: const EdgeInsets.all(12),
           child: TextField(
             controller: email,
-            decoration: const InputDecoration(
-              labelText: 'Email',
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+              labelText: 'Email'.tr,
+              border: const OutlineInputBorder(),
             ),
           ),
         ),
@@ -28,7 +28,7 @@ class EmailInputPopup extends GetView<AuthController> {
                 Get.back();
                 controller.forgetPassword(email.text);
               },
-              child: const Text('Submit'),
+              child: Text('Submit'.tr),
             )
           ],
         )

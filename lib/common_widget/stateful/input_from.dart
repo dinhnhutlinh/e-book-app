@@ -16,8 +16,6 @@ class InputForm extends StatefulWidget {
 }
 
 class _InputFormState extends State<InputForm> {
-  final bool _isHide = true;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
