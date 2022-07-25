@@ -64,7 +64,7 @@ flutter_gen:
     flutter_svg: true
 
 flutter_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   image_path: "resources/images/icon_lanch.png"
 

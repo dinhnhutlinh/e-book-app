@@ -117,7 +117,7 @@ class Langs extends Translations {
           'Can\'t connect': 'Không thể kết nối',
           'Account disabled': 'Tài khoản không khả dụng',
           'User not found': 'Không tìm thấy tài khoản',
-          'Invalid email': 'Email không chính sách',
+          'Invalid email': 'Email không chính xác',
           'Weak password': 'Mật khẩu yếu',
           'Email already in use': 'Email đã đươc sử dụng',
           'Error': 'Lỗi',

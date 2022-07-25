@@ -162,7 +162,7 @@ class BookService extends GetxService {
   }
 
   Future<List<Book>> getTrendBook() async {
-    return (await bookRef.limit(10).where('update').get())
+    return (await bookRef.orderBy('updateAt', descending: true).limit(10).get())
         .docs
         .map((e) => Book.fromJson(e.data()))
         .toList();

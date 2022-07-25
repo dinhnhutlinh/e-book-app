@@ -19,7 +19,7 @@ class BookWidget extends StatelessWidget {
         child: InkWell(
           onTap: () => Get.toNamed(BookDetailPage.route, arguments: book),
           child: CachedNetworkImage(
-            imageUrl: book.linkThumbnail ?? '',
+            imageUrl: book.linkImgOnl ?? '',
             fit: BoxFit.cover,
             placeholder: (context, url) => Shimmer.fromColors(
               baseColor: Colors.grey,

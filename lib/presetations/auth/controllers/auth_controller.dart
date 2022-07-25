@@ -62,7 +62,6 @@ class AuthController extends GetxController {
     if (repass.isEmpty) {
       return 'Pleace write repassword'.tr;
     }
-    if (!email.isEmail) return 'Invalid email'.tr;
 
     if (password != repass) return 'Password and repasssword don\'t correct'.tr;
 

@@ -159,7 +159,7 @@ class BookEditPage extends StatelessWidget {
                       TextFormField(
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText: 'Author'.tr),
+                            labelText: 'Content'.tr),
                         controller: controller.content,
                         maxLines: null,
                       ),
