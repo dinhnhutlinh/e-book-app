@@ -9,7 +9,7 @@ class SignInPage extends GetView<AuthController> {
   static const route = '/SignIn';
   final email = TextEditingController();
   final password = TextEditingController();
-
+ 
   SignInPage({Key? key}) : super(key: key);
 
   @override
