@@ -1,16 +1,19 @@
-# e_book_app
+# EBook
+## _Reading Book_
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+The application for reading PDF Book online. It offers many titles of many category and can download in app to reading when there is no internet. Using Flutter with new Material Design and Firebase use for Back-End
 
-A few resources to get you started if this is your first Flutter project:
+- State manager Getx, Clean Architecture, Dio
+- Dependence injection
+- Google sign in
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Authentication with email and password, Google
+- Reading, upload, edit, find, review, favorate download PDF Book
+- Support Dynamic theme, Dark mode, Multiple language
+
+## Download
+| Google Drive | https://drive.google.com/file/d/1jb570-skFI9jmy2h2XAQ99JJLf-dhLIA/view
